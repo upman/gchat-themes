@@ -1,0 +1,19 @@
+{
+  "name": "y",
+  "version": "0.0.1",
+  "description": "Custom google chat theme",
+  "main": "ts-built/content.js",
+  "repository": "https://github.com/upman/google-chat-dark-mode",
+  "author": "Ravi Kumar Lazar",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack"
+  },
+  "dependencies": {
+    "ts-loader": "^6.2.2",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
