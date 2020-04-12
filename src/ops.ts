@@ -1,97 +1,8 @@
 import {
-    contentContainerSelector,
-    threadContainerSelector,
-    messageContainerSelector,
-    messageHoverContainerSelector,
-    messageMarginSelector,
-    threadExpandSelector,
-    threadExpandCountSelector,
-    getSelectorStyle,
     getLogoContainer,
     replaceStyles,
     getIconSvgs,
-    iconSvgSelector
 } from './dom';
-
-export function switchContentBackground() : Boolean  {
-    var contentContainerStyle = getSelectorStyle(contentContainerSelector, function(el) {
-        return `.${el.className.split(' ')[0]}`;
-    });
-    if (!contentContainerStyle) {
-        return false;
-    }
-
-    contentContainerStyle.style.background = '#1F2024';
-    return true;
-}
-
-export function switchThreadBackground() : Boolean {
-    var threadContainerStyle = getSelectorStyle(threadContainerSelector);
-    var messageContainerStyle = getSelectorStyle(messageContainerSelector);
-    var messageHoverContainerStyle = getSelectorStyle(messageHoverContainerSelector, function(el) {
-        return `.${el.className.split(' ')[1]}:hover$`;
-    }, true);
-    if (
-        !threadContainerStyle ||
-        !messageContainerStyle ||
-        !messageHoverContainerStyle
-    ) {
-        return false;
-    }
-
-    threadContainerStyle.style.backgroundColor = '#1F2024';
-    messageContainerStyle.style.backgroundColor = '#1F2024';
-    messageHoverContainerStyle.style.backgroundColor = '#1F2024';
-    return true;
-}
-
-function switchMarginMessageContainerColor() {
-    var messageMarginContainerStyle = getSelectorStyle(
-        messageMarginSelector,
-        function(el) {
-            return `.${el.className.split(' ')[0]}$`;
-        },
-        true,
-        function(nodeList) {
-            for(var i = 0; i < nodeList.length; i += 1) {
-                // @ts-ignore
-                if (nodeList[i].getAttribute('aria-labelledby').split(' ').length === 1) {
-                    return nodeList[i];
-                }
-            }
-            return null;
-        }
-    );
-
-    if(!messageMarginContainerStyle) {
-        return false;
-    }
-
-    messageMarginContainerStyle.style.backgroundColor = '#1F2024';
-    return true;
-}
-
-function switchExpandThreadLabelBackground() {
-    var expandThreadStyle = getSelectorStyle(
-        threadExpandSelector,
-        function(el) {
-            return `.${el.className.split(' ')[0]}`;
-        }
-    );
-    var expandThreadCountStyle = getSelectorStyle(
-        threadExpandCountSelector,
-        function(el) {
-            return `.${el.className.split(' ')[0]}`;
-        }
-    );
-    if (!expandThreadStyle || !expandThreadCountStyle) {
-        return false;
-    }
-
-    expandThreadStyle.style.backgroundColor = '#1F2024';
-    expandThreadCountStyle.style.backgroundColor = '#1F2024';
-    return true;
-}
 
 function switchLogoColor() {
     var logoContainer = getLogoContainer();
@@ -292,11 +203,6 @@ function carpetBombStyle() {
             to: 'rgb(231, 232, 235)'
 
         },
-        // {
-        //     // Primary text
-        //     from: 'rgb(33, 33, 33)',
-        //     to: 'rgb(231, 232, 235)'
-        // },
         {
             // Secondary text
             from: 'rgb(95, 99, 104)',
@@ -371,10 +277,6 @@ function carpetBombStyle() {
 }
 
 export const allOps = [
-    // switchContentBackground,
-    // switchThreadBackground,
-    // switchMarginMessageContainerColor,
-    // switchExpandThreadLabelBackground,
     switchLogoColor,
     switchIconsColor,
     carpetBombStyle

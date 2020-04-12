@@ -1,13 +1,5 @@
 import type { customStyleSheet } from './types';
 
-
-export const contentContainerSelector = 'div[data-soft-view-id] > c-wiz[role="main"] > div';
-export const threadContainerSelector = 'c-wiz[data-topic-id] > div:nth-of-type(2)';
-export const messageContainerSelector = 'div[data-id][data-user-id][data-created][jsname] > div > div > div:nth-of-type(2)';
-export const messageHoverContainerSelector = 'div[data-id][data-user-id][data-created][jsname] > div > div > div:nth-of-type(2) > div:nth-of-type(2)';
-export const messageMarginSelector = 'div[data-id][data-user-id][data-created][jsname][aria-labelledby]';
-export const threadExpandSelector = 'c-wiz[data-topic-id] > div:nth-of-type(2) > div:nth-of-type(2) > div[role="button"]:nth-of-type(2) > span:nth-child(2)';
-export const threadExpandCountSelector = 'c-wiz[data-topic-id] > div:nth-of-type(2) > div:nth-of-type(2) > div[role="button"]:nth-of-type(2) > div > div > div';
 export const logoContainerSelector = 'svg > g:nth-child(2) > g > g > g > g > g > g > g > g';
 export const iconSvgSelector =
     'body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span svg,' +

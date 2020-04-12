@@ -117,66 +117,6 @@ main();
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = __webpack_require__(2);
-function switchContentBackground() {
-    var contentContainerStyle = dom_1.getSelectorStyle(dom_1.contentContainerSelector, function (el) {
-        return "." + el.className.split(' ')[0];
-    });
-    if (!contentContainerStyle) {
-        return false;
-    }
-    contentContainerStyle.style.background = '#1F2024';
-    return true;
-}
-exports.switchContentBackground = switchContentBackground;
-function switchThreadBackground() {
-    var threadContainerStyle = dom_1.getSelectorStyle(dom_1.threadContainerSelector);
-    var messageContainerStyle = dom_1.getSelectorStyle(dom_1.messageContainerSelector);
-    var messageHoverContainerStyle = dom_1.getSelectorStyle(dom_1.messageHoverContainerSelector, function (el) {
-        return "." + el.className.split(' ')[1] + ":hover$";
-    }, true);
-    if (!threadContainerStyle ||
-        !messageContainerStyle ||
-        !messageHoverContainerStyle) {
-        return false;
-    }
-    threadContainerStyle.style.backgroundColor = '#1F2024';
-    messageContainerStyle.style.backgroundColor = '#1F2024';
-    messageHoverContainerStyle.style.backgroundColor = '#1F2024';
-    return true;
-}
-exports.switchThreadBackground = switchThreadBackground;
-function switchMarginMessageContainerColor() {
-    var messageMarginContainerStyle = dom_1.getSelectorStyle(dom_1.messageMarginSelector, function (el) {
-        return "." + el.className.split(' ')[0] + "$";
-    }, true, function (nodeList) {
-        for (var i = 0; i < nodeList.length; i += 1) {
-            // @ts-ignore
-            if (nodeList[i].getAttribute('aria-labelledby').split(' ').length === 1) {
-                return nodeList[i];
-            }
-        }
-        return null;
-    });
-    if (!messageMarginContainerStyle) {
-        return false;
-    }
-    messageMarginContainerStyle.style.backgroundColor = '#1F2024';
-    return true;
-}
-function switchExpandThreadLabelBackground() {
-    var expandThreadStyle = dom_1.getSelectorStyle(dom_1.threadExpandSelector, function (el) {
-        return "." + el.className.split(' ')[0];
-    });
-    var expandThreadCountStyle = dom_1.getSelectorStyle(dom_1.threadExpandCountSelector, function (el) {
-        return "." + el.className.split(' ')[0];
-    });
-    if (!expandThreadStyle || !expandThreadCountStyle) {
-        return false;
-    }
-    expandThreadStyle.style.backgroundColor = '#1F2024';
-    expandThreadCountStyle.style.backgroundColor = '#1F2024';
-    return true;
-}
 function switchLogoColor() {
     var logoContainer = dom_1.getLogoContainer();
     // @ts-ignore
@@ -371,11 +311,6 @@ function carpetBombStyle() {
                 from: 'rgb(32, 33, 36)',
                 to: 'rgb(231, 232, 235)'
             },
-            // {
-            //     // Primary text
-            //     from: 'rgb(33, 33, 33)',
-            //     to: 'rgb(231, 232, 235)'
-            // },
             {
                 // Secondary text
                 from: 'rgb(95, 99, 104)',
@@ -449,10 +384,6 @@ function carpetBombStyle() {
     }, 5000);
 }
 exports.allOps = [
-    // switchContentBackground,
-    // switchThreadBackground,
-    // switchMarginMessageContainerColor,
-    // switchExpandThreadLabelBackground,
     switchLogoColor,
     switchIconsColor,
     carpetBombStyle
@@ -466,13 +397,6 @@ exports.allOps = [
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.contentContainerSelector = 'div[data-soft-view-id] > c-wiz[role="main"] > div';
-exports.threadContainerSelector = 'c-wiz[data-topic-id] > div:nth-of-type(2)';
-exports.messageContainerSelector = 'div[data-id][data-user-id][data-created][jsname] > div > div > div:nth-of-type(2)';
-exports.messageHoverContainerSelector = 'div[data-id][data-user-id][data-created][jsname] > div > div > div:nth-of-type(2) > div:nth-of-type(2)';
-exports.messageMarginSelector = 'div[data-id][data-user-id][data-created][jsname][aria-labelledby]';
-exports.threadExpandSelector = 'c-wiz[data-topic-id] > div:nth-of-type(2) > div:nth-of-type(2) > div[role="button"]:nth-of-type(2) > span:nth-child(2)';
-exports.threadExpandCountSelector = 'c-wiz[data-topic-id] > div:nth-of-type(2) > div:nth-of-type(2) > div[role="button"]:nth-of-type(2) > div > div > div';
 exports.logoContainerSelector = 'svg > g:nth-child(2) > g > g > g > g > g > g > g > g';
 exports.iconSvgSelector = 'body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span svg,' +
     'c-wiz[data-node-index] > div:nth-child(1) > span:nth-child(2) > span > svg, ' +
