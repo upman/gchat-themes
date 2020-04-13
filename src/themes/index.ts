@@ -2,6 +2,6 @@ import dark from './dark';
 import defaultMode from './default';
 
 export default {
-    dark,
-    defaultMode
+    'Dark Mode': dark,
+    'Default Theme': defaultMode
 };

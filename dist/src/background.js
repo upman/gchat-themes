@@ -81,16 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 6:
+/***/ 8:
 /***/ (function(module, exports) {
 
 chrome.runtime.onInstalled.addListener(function () {
-    // Replace all rules ...
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
         // With a new rule ...
         chrome.declarativeContent.onPageChanged.addRules([
@@ -105,6 +104,19 @@ chrome.runtime.onInstalled.addListener(function () {
             }
         ]);
     });
+});
+// Receiving messages from popup.ts
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if (request.themeChange) {
+        // Proxying message to content.ts
+        //@ts-ignore
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            console.log(tabs);
+            chrome.tabs.sendMessage(tabs[0].id, { themeChange: request.themeChange }, function (response) {
+                sendResponse(response);
+            });
+        });
+    }
 });
 
 

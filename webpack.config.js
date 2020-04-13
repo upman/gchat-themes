@@ -18,7 +18,8 @@ module.exports = {
         rules: [{ test: /\.ts$/, loader: "ts-loader" }]
     },
     optimization: {
-        minimize: false
+        minimize: false,
+        usedExports: true
     },
     plugins: [
         new CopyPlugin([

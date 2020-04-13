@@ -81,170 +81,11 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ops_1 = __webpack_require__(1);
-var opsMem = [];
-for (var i = 0; i < ops_1.allOps.length; i += 1) {
-    opsMem.push({
-        applied: false,
-        op: ops_1.allOps[i]
-    });
-}
-function main() {
-    for (var i = 0; i < ops_1.allOps.length; i += 1) {
-        if (!opsMem[i].applied) {
-            opsMem[i].op();
-        }
-    }
-}
-window.onload = main;
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var dom_1 = __webpack_require__(2);
-var lodash_1 = __webpack_require__(3);
-var dark_1 = __webpack_require__(8);
-var ruleSwaps_1 = __webpack_require__(9);
-function switchLogoColor(color) {
-    var logoContainer = dom_1.getLogoContainer();
-    if (!logoContainer) {
-        return false;
-    }
-    // @ts-ignore
-    logoContainer.style = "fill: " + color + ";";
-    return false;
-}
-function switchIconsColor(color) {
-    var iconSvgs = dom_1.getIconSvgs();
-    for (var idx = 0; idx < iconSvgs.length; idx += 1) {
-        //@ts-ignore
-        iconSvgs[idx].style = "fill: " + color;
-    }
-}
-function cssRuleMatchesSwap(rule, swap) {
-    // @ts-ignore
-    var match = lodash_1.some(swap.initial, function (i) {
-        //@ts-ignore
-        return rule.style && rule.style[swap.prop] === i;
-    });
-    return match;
-}
-function getMatchedStyleRulesForSwap(swap) {
-    var matchedStyleRules = [];
-    lodash_1.each(lodash_1.range(1, document.styleSheets.length), function (index) {
-        var cssRules;
-        try {
-            // @ts-ignore
-            cssRules = document.styleSheets[index].cssRules;
-        }
-        catch (e) {
-            // Cannot read external stylesheet
-            console.log(e, index);
-            return;
-        }
-        //@ts-ignore
-        lodash_1.each(cssRules, function (rule) {
-            if (cssRuleMatchesSwap(rule, swap)) {
-                matchedStyleRules.push(rule);
-            }
-        });
-    });
-    return matchedStyleRules;
-}
-function createRuleSwapList() {
-    var ruleSwapList = lodash_1.mapValues(ruleSwaps_1.default, function (swaps) {
-        return lodash_1.map(swaps, function (swap) {
-            return __assign({ 
-                //@ts-ignore
-                prop: swap.prop, matchedStyleRules: getMatchedStyleRulesForSwap(swap) }, (swap.transform ? { transform: swap.transform } : {}));
-        });
-    });
-    // @ts-ignore
-    window.googleChatThemesRuleSwapList = ruleSwapList;
-}
-exports.createRuleSwapList = createRuleSwapList;
-function applyTheme(theme) {
-    switchLogoColor(theme.primaryText);
-    switchIconsColor(theme.icons);
-    lodash_1.each(lodash_1.keys(theme).concat(['misc']), function (themeProp) {
-        applyThemeProperty(themeProp, theme[themeProp]);
-    });
-}
-exports.applyTheme = applyTheme;
-function applyThemeProperty(themeProp, themeValue) {
-    //@ts-ignore
-    var ruleSwaps = window.googleChatThemesRuleSwapList[themeProp];
-    lodash_1.each(ruleSwaps, function (swap) {
-        lodash_1.each(swap.matchedStyleRules, function (rule) {
-            if (rule.selectorText === '.yg4pvb::before' && swap.initial && swap.initial[0] === 'linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)') {
-                debugger;
-            }
-            if (swap.transform) {
-                return swap.transform(themeValue, rule.style);
-            }
-            rule.style[swap.prop] = themeValue;
-        });
-    });
-}
-exports.applyThemeProperty = applyThemeProperty;
-exports.allOps = [
-    createRuleSwapList,
-    function () {
-        applyTheme(dark_1.default);
-    }
-];
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.logoContainerSelector = 'svg > g:nth-child(2) > g > g > g > g > g > g > g > g';
-exports.iconSvgSelector = 'body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span svg,' +
-    'c-wiz[data-node-index] > div:nth-child(1) > span:nth-child(2) > span > svg, ' +
-    'c-wiz > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) svg, ' +
-    'c-wiz > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1) svg';
-function getLogoContainer() {
-    return document.querySelector(exports.logoContainerSelector);
-}
-exports.getLogoContainer = getLogoContainer;
-function getIconSvgs() {
-    return document.querySelectorAll(exports.iconSvgSelector);
-}
-exports.getIconSvgs = getIconSvgs;
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -7022,10 +6863,10 @@ exports.getIconSvgs = getIconSvgs;
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(4)(module), __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)(module), __webpack_require__(2)))
 
 /***/ }),
-/* 4 */
+/* 1 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -7053,7 +6894,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 5 */
+/* 2 */
 /***/ (function(module, exports) {
 
 var g;
@@ -7079,9 +6920,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 6 */,
-/* 7 */,
-/* 8 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7114,7 +6953,158 @@ exports.default = darkTheme;
 
 
 /***/ }),
-/* 9 */
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ops_1 = __webpack_require__(5);
+var dark_1 = __webpack_require__(3);
+function main() {
+    ops_1.createRuleSwapList();
+    ops_1.applyTheme(dark_1.default);
+}
+window.onload = main;
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    console.log(sender.tab ?
+        "from a content script:" + sender.tab.url :
+        "from the extension");
+    if (request.themeChange) {
+        ops_1.applyTheme(request.themeChange);
+        sendResponse({ farewell: "goodbye" });
+    }
+});
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var dom_1 = __webpack_require__(6);
+var lodash_1 = __webpack_require__(0);
+var ruleSwaps_1 = __webpack_require__(7);
+function switchLogoColor(color) {
+    var logoContainer = dom_1.getLogoContainer();
+    if (!logoContainer) {
+        return false;
+    }
+    // @ts-ignore
+    logoContainer.style = "fill: " + color + ";";
+    return false;
+}
+function switchIconsColor(color) {
+    var iconSvgs = dom_1.getIconSvgs();
+    for (var idx = 0; idx < iconSvgs.length; idx += 1) {
+        //@ts-ignore
+        iconSvgs[idx].style = "fill: " + color;
+    }
+}
+function cssRuleMatchesSwap(rule, swap) {
+    // @ts-ignore
+    var match = lodash_1.some(swap.initial, function (i) {
+        //@ts-ignore
+        return rule.style && rule.style[swap.prop] === i;
+    });
+    return match;
+}
+function getMatchedStyleRulesForSwap(swap) {
+    var matchedStyleRules = [];
+    lodash_1.each(lodash_1.range(1, document.styleSheets.length), function (index) {
+        var cssRules;
+        try {
+            // @ts-ignore
+            cssRules = document.styleSheets[index].cssRules;
+        }
+        catch (e) {
+            // Cannot read external stylesheet
+            return;
+        }
+        //@ts-ignore
+        lodash_1.each(cssRules, function (rule) {
+            if (cssRuleMatchesSwap(rule, swap)) {
+                matchedStyleRules.push(rule);
+            }
+        });
+    });
+    return matchedStyleRules;
+}
+function createRuleSwapList() {
+    var ruleSwapList = lodash_1.mapValues(ruleSwaps_1.default, function (swaps) {
+        return lodash_1.map(swaps, function (swap) {
+            return __assign({ 
+                //@ts-ignore
+                prop: swap.prop, matchedStyleRules: getMatchedStyleRulesForSwap(swap) }, (swap.transform ? { transform: swap.transform } : {}));
+        });
+    });
+    // @ts-ignore
+    window.googleChatThemesRuleSwapList = ruleSwapList;
+}
+exports.createRuleSwapList = createRuleSwapList;
+function applyTheme(theme) {
+    switchLogoColor(theme.primaryText);
+    switchIconsColor(theme.icons);
+    lodash_1.each(lodash_1.keys(theme).concat(['misc']), function (themeProp) {
+        applyThemeProperty(themeProp, theme[themeProp]);
+    });
+}
+exports.applyTheme = applyTheme;
+function applyThemeProperty(themeProp, themeValue) {
+    //@ts-ignore
+    var ruleSwaps = window.googleChatThemesRuleSwapList[themeProp];
+    lodash_1.each(ruleSwaps, function (swap) {
+        lodash_1.each(swap.matchedStyleRules, function (rule) {
+            if (rule.selectorText === '.yg4pvb::before' && swap.initial && swap.initial[0] === 'linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)') {
+                debugger;
+            }
+            if (swap.transform) {
+                return swap.transform(themeValue, rule.style);
+            }
+            rule.style[swap.prop] = themeValue;
+        });
+    });
+}
+exports.applyThemeProperty = applyThemeProperty;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.logoContainerSelector = 'svg > g:nth-child(2) > g > g > g > g > g > g > g > g';
+exports.iconSvgSelector = 'body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span svg,' +
+    'c-wiz[data-node-index] > div:nth-child(1) > span:nth-child(2) > span > svg, ' +
+    'c-wiz > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) svg, ' +
+    'c-wiz > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1) svg';
+function getLogoContainer() {
+    return document.querySelector(exports.logoContainerSelector);
+}
+exports.getLogoContainer = getLogoContainer;
+function getIconSvgs() {
+    return document.querySelectorAll(exports.iconSvgSelector);
+}
+exports.getIconSvgs = getIconSvgs;
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

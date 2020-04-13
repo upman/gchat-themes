@@ -3,7 +3,6 @@ import {
     getIconSvgs,
 } from './dom';
 import { each, mapValues, map, some, range, keys } from 'lodash';
-import dark from './themes/dark';
 import type { Theme } from './types';
 import ruleSwaps from './ruleSwaps';
 
@@ -43,7 +42,6 @@ function getMatchedStyleRulesForSwap(swap) {
             cssRules = document.styleSheets[index].cssRules;
         } catch(e) {
             // Cannot read external stylesheet
-            console.log(e, index);
             return;
         }
         //@ts-ignore
@@ -97,10 +95,3 @@ export function applyThemeProperty(themeProp, themeValue) {
         });
     });
 }
-
-export const allOps = [
-    createRuleSwapList,
-    function() {
-        applyTheme(dark);
-    }
-];

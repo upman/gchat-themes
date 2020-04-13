@@ -1,21 +1,21 @@
-import { allOps } from './ops';
-
-var opsMem = [];
-
-for(var i = 0; i < allOps.length; i += 1) {
-    opsMem.push({
-        applied: false,
-        op: allOps[i]
-    });
-}
+import { createRuleSwapList,  applyTheme } from './ops';
+import dark from './themes/dark';
 
 function main() {
-    for(var i = 0; i < allOps.length; i += 1) {
-        if (!opsMem[i].applied) {
-            opsMem[i].op();
-        }
-    }
+    createRuleSwapList();
+    applyTheme(dark);
 }
 
 window.onload = main;
 
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        console.log(sender.tab ?
+                    "from a content script:" + sender.tab.url :
+                    "from the extension");
+        if (request.themeChange) {
+            applyTheme(request.themeChange);
+            sendResponse({farewell: "goodbye"});
+        }
+    }
+);
