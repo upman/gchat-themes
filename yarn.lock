@@ -27,6 +27,31 @@
   resolved "https://registry.yarnpkg.com/@types/har-format/-/har-format-1.2.4.tgz#3275842095abb60d14b47fa798cc9ff708dab6d4"
   integrity sha512-iUxzm1meBm3stxUMzRqgOVHjj4Kgpgu5w9fm4X7kPRfSgVRzythsucEN7/jtOo8SQzm+HfcxWWzJS0mJDH/3DQ==
 
+"@types/jquery@*", "@types/jquery@^3.3.34":
+  version "3.3.34"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.34.tgz#0d3b94057063d3854adaeb579652048fec07ba6c"
+  integrity sha512-lW9vsVL53Xu/Nj4gi2hNmHGc4u3KKghjqTkAlO0kF5GIOPxbqqnQpgqJBzmn3yXLrPqHb6cmNJ6URnS23Vtvbg==
+  dependencies:
+    "@types/sizzle" "*"
+
+"@types/sizzle@*":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
+  integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
+
+"@types/spectrum@^1.5.31":
+  version "1.5.31"
+  resolved "https://registry.yarnpkg.com/@types/spectrum/-/spectrum-1.5.31.tgz#4cde06a2658d19d1e4bdc1001e7d4da339f5028b"
+  integrity sha512-v1lU8dbHmiPgj1EXj/+Iwpfj7TRakiNzZspMdFSp17cDD7qdv7XgwcpzdfB5a3TNI0S9qHdvF5wEnLLSt2rcVw==
+  dependencies:
+    "@types/jquery" "*"
+    "@types/tinycolor2" "*"
+
+"@types/tinycolor2@*":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@types/tinycolor2/-/tinycolor2-1.4.2.tgz#721ca5c5d1a2988b4a886e35c2ffc5735b6afbdf"
+  integrity sha512-PeHg/AtdW6aaIO2a+98Xj7rWY4KC1E6yOy7AFknJQ7VXUGNrMlyxDFxJo7HqLtjQms/ZhhQX52mLVW/EX3JGOw==
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"

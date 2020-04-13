@@ -17,5 +17,5 @@ function main() {
     }
 }
 
-main();
+window.onload = main;
 

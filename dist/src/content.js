@@ -106,7 +106,7 @@ function main() {
         }
     }
 }
-main();
+window.onload = main;
 
 
 /***/ }),
@@ -119,8 +119,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var dom_1 = __webpack_require__(2);
 function switchLogoColor() {
     var logoContainer = dom_1.getLogoContainer();
+    if (!logoContainer) {
+        return false;
+    }
     // @ts-ignore
     logoContainer.style = 'fill: white;';
+    return false;
 }
 function switchIconsColor() {
     var iconSvgs = dom_1.getIconSvgs();
@@ -323,65 +327,62 @@ function carpetBombStyle() {
             }
         ]
     }, 7);
-    setTimeout(function () {
-        // TODO
-        dom_1.replaceStyles({
-            background: [
-                {
-                    // search bar active background
-                    from: 'rgb(255, 255, 255)',
-                    to: 'rgb(25, 39, 52)'
-                },
-                {
-                    // account dialog managed by
-                    from: 'rgb(232, 240, 254)',
-                    to: 'rgb(43, 65, 86)'
-                }
-            ],
-            backgroundColor: [
-                {
-                    // account dialog hover
-                    from: 'rgb(247, 248, 248)',
-                    to: 'rgb(32, 48, 61)'
-                },
-                {
-                    // search bar active background
-                    from: 'rgb(255, 255, 255)',
-                    to: 'rgb(25, 39, 52)'
-                },
-            ],
-            color: [
-                {
-                    // Primary text
-                    from: 'rgb(32, 33, 36)',
-                    to: 'rgb(231, 232, 235)'
-                },
-                {
-                    // Primary text
-                    from: 'rgb(60, 64, 67)',
-                    to: 'rgb(231, 232, 235)'
-                },
-                {
-                    // Secondary text
-                    from: 'rgb(95, 99, 104)',
-                    to: 'rgb(136, 153, 166)'
-                },
-            ],
-            borderColor: [
-                {
-                    // borders on account drop down menu
-                    from: 'rgb(218, 220, 224) rgb(218, 220, 224) rgb(135, 143, 156)',
-                    to: 'rgb(135, 143, 156) rgb(135, 143, 156) rgb(135, 143, 156)'
-                }
-            ],
-            borderBottom: [
-                {
-                    from: '1px solid rgb(218, 220, 224)',
-                    to: '1px solid rgb(135, 143, 156)'
-                }
-            ]
-        }, 9);
-    }, 5000);
+    dom_1.replaceStyles({
+        background: [
+            {
+                // search bar active background
+                from: 'rgb(255, 255, 255)',
+                to: 'rgb(25, 39, 52)'
+            },
+            {
+                // account dialog managed by
+                from: 'rgb(232, 240, 254)',
+                to: 'rgb(43, 65, 86)'
+            }
+        ],
+        backgroundColor: [
+            {
+                // account dialog hover
+                from: 'rgb(247, 248, 248)',
+                to: 'rgb(32, 48, 61)'
+            },
+            {
+                // search bar active background
+                from: 'rgb(255, 255, 255)',
+                to: 'rgb(25, 39, 52)'
+            },
+        ],
+        color: [
+            {
+                // Primary text
+                from: 'rgb(32, 33, 36)',
+                to: 'rgb(231, 232, 235)'
+            },
+            {
+                // Primary text
+                from: 'rgb(60, 64, 67)',
+                to: 'rgb(231, 232, 235)'
+            },
+            {
+                // Secondary text
+                from: 'rgb(95, 99, 104)',
+                to: 'rgb(136, 153, 166)'
+            },
+        ],
+        borderColor: [
+            {
+                // borders on account drop down menu
+                from: 'rgb(218, 220, 224) rgb(218, 220, 224) rgb(135, 143, 156)',
+                to: 'rgb(135, 143, 156) rgb(135, 143, 156) rgb(135, 143, 156)'
+            }
+        ],
+        borderBottom: [
+            {
+                from: '1px solid rgb(218, 220, 224)',
+                to: '1px solid rgb(135, 143, 156)'
+            }
+        ]
+    }, 9);
 }
 exports.allOps = [
     switchLogoColor,

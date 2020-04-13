@@ -28,6 +28,7 @@
         "persistent": false
     },
     "permissions": [
-        "declarativeContent"
+        "declarativeContent",
+        "storage"
     ]
 }

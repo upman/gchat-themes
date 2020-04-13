@@ -81,29 +81,20 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 3:
+/***/ 4:
 /***/ (function(module, exports) {
 
-chrome.runtime.onInstalled.addListener(function () {
-    // Replace all rules ...
-    chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
-        // With a new rule ...
-        chrome.declarativeContent.onPageChanged.addRules([
-            {
-                conditions: [
-                    new chrome.declarativeContent.PageStateMatcher({
-                        pageUrl: { urlContains: 'chat.google.com' },
-                    })
-                ],
-                // And shows the extension's page action.
-                actions: [new chrome.declarativeContent.ShowPageAction()]
-            }
-        ]);
+$(document).ready(function () {
+    $('#color-picker').spectrum({
+        //@ts-ignore
+        type: 'text',
+        color: 'black',
+        showPalette: false
     });
 });
 

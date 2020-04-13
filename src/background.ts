@@ -4,7 +4,6 @@ chrome.runtime.onInstalled.addListener(function() {
         // With a new rule ...
         chrome.declarativeContent.onPageChanged.addRules([
             {
-                // That fires when a page's URL contains a 'g' ...
                 conditions: [
                     new chrome.declarativeContent.PageStateMatcher({
                         pageUrl: { urlContains: 'chat.google.com' },

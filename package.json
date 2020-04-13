@@ -10,6 +10,8 @@
     "dev": "webpack"
   },
   "dependencies": {
+    "@types/jquery": "^3.3.34",
+    "@types/spectrum": "^1.5.31",
     "ts-loader": "^6.2.2",
     "tsc": "^1.20150623.0",
     "typescript": "^3.8.3",
