@@ -4,5 +4,8 @@
         "target": "ES5",
         "outDir": "ts-built",
         "rootDir": "src"
-    }
+    },
+    "types": [
+        "chrome"
+    ]
 }

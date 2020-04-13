@@ -1,9 +1,14 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
-    entry: "./src/content.ts",
+    entry: {
+        "content": "./src/content.ts",
+        "background": "./src/background.ts"
+    },
     output: {
-        filename: "content.js",
-        path: path.resolve(__dirname, 'dist')
+        filename: "[name].js",
+        path: path.resolve(__dirname, 'dist', 'src')
     },
     resolve: {
         extensions: [".webpack.js", ".web.js", ".ts", ".js"]
@@ -14,5 +19,18 @@ module.exports = {
     optimization: {
         minimize: false
     },
+    plugins: [
+        new CopyPlugin([
+            { from: 'images', to: 'images', transformPath: function(targetPath) {
+                return path.join('..', targetPath);
+            }},
+            { from: 'manifest.json', to: 'manifest.json', transformPath: function(targetPath) {
+                return path.join('..', targetPath);
+            } },
+            { from: 'src/popup', to: 'src/popup', transformPath: function(targetPath) {
+                return path.join('..', targetPath);
+            } },
+        ]),
+    ],
     watch: true,
 }
