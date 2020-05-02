@@ -1,7 +1,7 @@
 import type { Theme } from '../types';
 
-const defaultTheme: Theme = {
-    name: 'Default',
+const slackTheme: Theme = {
+    name: 'Slack',
     props: {
         primaryText: 'rgb(32, 33, 36)',
         secondaryText: 'rgb(136, 153, 166)',
@@ -24,7 +24,10 @@ const defaultTheme: Theme = {
         borders: '1px solid rgb(218, 220, 224)',
         shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
         searchBarActiveBackground: 'rgb(255, 255, 255)'
-    }
+    },
+    sideBarBackground: '#3E103F',
+    unreadChannelColor: '#fff',
+    channelColor: '#cac4c9'
 };
 
-export default defaultTheme;
+export default slackTheme;

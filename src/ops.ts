@@ -30,7 +30,11 @@ function cssRuleMatchesSwap(rule, swap) {
         //@ts-ignore
         return rule.style && rule.style[swap.prop] === i;
     });
-    return match;
+
+    var selectorMatch = swap.selectorTexts && some(swap.selectorTexts, function (i) {
+        return rule.style && rule.selectorText === i;
+    });
+    return match || selectorMatch;
 }
 
 function getMatchedStyleRulesForSwap(swap) {
@@ -62,6 +66,7 @@ export function createRuleSwapList() {
                 //@ts-ignore
                 prop: swap.prop,
                 matchedStyleRules: getMatchedStyleRulesForSwap(swap),
+                selectorText: swap.selectorText,
                 //@ts-ignore
                 ...(swap.transform ? { transform: swap.transform } : {})
             }
@@ -73,25 +78,24 @@ export function createRuleSwapList() {
 }
 
 export function applyTheme(theme: Theme) {
-    switchLogoColor(theme.primaryText);
-    switchIconsColor(theme.icons);
-    each(keys(theme).concat(['misc']), function(themeProp) {
-        applyThemeProperty(themeProp, theme[themeProp]);
+    switchLogoColor(theme.unreadChannelColor ? theme.unreadChannelColor : theme.props.primaryText);
+    switchIconsColor(theme.props.icons);
+    each(keys(theme.props).concat(['misc']), function(themeProp) {
+        applyThemeProperty(theme, themeProp, theme.props[themeProp]);
     });
 }
 
-export function applyThemeProperty(themeProp, themeValue) {
+export function applyThemeProperty(theme: Theme, themeProp, themeValue) {
     //@ts-ignore
     var ruleSwaps = window.googleChatThemesRuleSwapList[themeProp];
     each(ruleSwaps, function(swap) {
         each(swap.matchedStyleRules, function(rule) {
-            if (rule.selectorText === '.yg4pvb::before' && swap.initial && swap.initial[0] === 'linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)') {
-                debugger;
-            }
             if (swap.transform) {
-                return swap.transform(themeValue, rule.style);
+                return swap.transform(theme, themeProp, themeValue, rule.style);
             }
-            rule.style[swap.prop] = themeValue;
+            if (rule.style && rule.style[swap.prop]) {
+                rule.style[swap.prop] = themeValue;
+            }
         });
     });
 }

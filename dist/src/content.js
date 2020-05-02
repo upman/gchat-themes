@@ -81,11 +81,64 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var darkTheme = {
+    name: 'Dark',
+    props: {
+        primaryText: 'rgb(231, 232, 235)',
+        secondaryText: 'rgb(136, 153, 166)',
+        mentions: 'rgb(65, 173, 240)',
+        inlineMarkdownText: 'rgb(245, 245, 245)',
+        multilineMarkdownText: 'rgb(239, 239, 239)',
+        links: 'rgb(65, 173, 240)',
+        icons: 'rgba(255, 255, 255, 0.54)',
+        threadBackground: 'rgb(25, 39, 52)',
+        threadContainerBackground: 'rgb(21, 32, 43)',
+        chatTitleBackground: 'rgb(0, 0, 0)',
+        hoverBackground: 'rgb(32, 48, 61)',
+        mentionNotificationBackground: 'rgb(65, 173, 240)',
+        inlineMarkdownBackground: 'rgb(55, 86, 115)',
+        buttonBackground: 'rgb(29, 161, 242)',
+        iconHoverBackground: 'rgba(226, 230, 234, 0.14)',
+        threadBorderColor: 'rgb(83, 102, 115)',
+        multiLineMarkdownBorderColor: 'rgb(71, 110, 146)',
+        inlineMarkdownBorder: '1px solid rgb(62, 97, 130)',
+        borders: '1px solid rgb(135, 143, 156)',
+        shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
+        searchBarActiveBackground: 'rgb(25, 39, 52)'
+    }
+};
+exports.default = darkTheme;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var dark_1 = __webpack_require__(0);
+var default_1 = __webpack_require__(6);
+var slack_1 = __webpack_require__(7);
+exports.default = {
+    'Dark Mode': dark_1.default,
+    'Default Theme': default_1.default,
+    'Slack': slack_1.default,
+};
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -6863,10 +6916,10 @@
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)(module), __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(3)(module), __webpack_require__(4)))
 
 /***/ }),
-/* 1 */
+/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -6894,7 +6947,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var g;
@@ -6920,65 +6973,152 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var darkTheme = {
-    primaryText: 'rgb(231, 232, 235)',
-    secondaryText: 'rgb(136, 153, 166)',
-    mentions: 'rgb(65, 173, 240)',
-    inlineMarkdownText: 'rgb(245, 245, 245)',
-    multilineMarkdownText: 'rgb(239, 239, 239)',
-    links: 'rgb(65, 173, 240)',
-    icons: 'rgba(255, 255, 255, 0.54)',
-    threadBackground: 'rgb(25, 39, 52)',
-    threadContainerBackground: 'rgb(21, 32, 43)',
-    chatTitleBackground: 'rgb(0, 0, 0)',
-    hoverBackground: 'rgb(32, 48, 61)',
-    mentionNotificationBackground: 'rgb(65, 173, 240)',
-    inlineMarkdownBackground: 'rgb(55, 86, 115)',
-    buttonBackground: 'rgb(29, 161, 242)',
-    iconHoverBackground: 'rgba(226, 230, 234, 0.14)',
-    threadBorderColor: 'rgb(83, 102, 115)',
-    multiLineMarkdownBorderColor: 'rgb(71, 110, 146)',
-    inlineMarkdownBorder: '1px solid rgb(62, 97, 130)',
-    borders: '1px solid rgb(135, 143, 156)',
-    shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
-    searchBarActiveBackground: 'rgb(25, 39, 52)'
-};
-exports.default = darkTheme;
+var dark_1 = __webpack_require__(0);
+var themes_1 = __webpack_require__(1);
+var APPLIED_THEME_KEY = 'appliedTheme';
+function getAppliedTheme(cb) {
+    chrome.storage.sync.get([APPLIED_THEME_KEY], function (result) {
+        if (result.appliedTheme) {
+            cb(themes_1.default[result.appliedTheme]);
+        }
+        else {
+            cb(dark_1.default);
+        }
+    });
+}
+exports.getAppliedTheme = getAppliedTheme;
+function setAppliedTheme(themeName, cb) {
+    var _a;
+    chrome.storage.sync.set((_a = {}, _a[APPLIED_THEME_KEY] = themeName, _a), function () {
+        if (cb) {
+            cb();
+        }
+    });
+}
+exports.setAppliedTheme = setAppliedTheme;
+function getThemeFromName(themeName, cb) {
+    if (themes_1.default[themeName]) {
+        return cb(themes_1.default[themeName]);
+    }
+}
+exports.getThemeFromName = getThemeFromName;
+function onThemeChange(cb) {
+    chrome.storage.onChanged.addListener(function (changed, namespace) {
+        if (changed[APPLIED_THEME_KEY]) {
+            var themeName = changed[APPLIED_THEME_KEY].newValue;
+            getThemeFromName(themeName, function (theme) {
+                cb(theme);
+            });
+        }
+    });
+}
+exports.onThemeChange = onThemeChange;
 
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ops_1 = __webpack_require__(5);
-var dark_1 = __webpack_require__(3);
+var defaultTheme = {
+    name: 'Default',
+    props: {
+        primaryText: 'rgb(32, 33, 36)',
+        secondaryText: 'rgb(136, 153, 166)',
+        mentions: 'rgb(0, 121, 107)',
+        inlineMarkdownText: 'rgb(231, 232, 235)',
+        multilineMarkdownText: 'rgb(66, 66, 66)',
+        links: 'rgb(26, 115, 232)',
+        icons: 'rgba(0, 0, 0, 0.54)',
+        threadBackground: 'rgb(255, 255, 255)',
+        threadContainerBackground: 'rgb(242, 242, 242)',
+        chatTitleBackground: 'rgb(228, 247, 251)',
+        hoverBackground: 'rgb(248, 249, 250)',
+        mentionNotificationBackground: 'rgb(0, 121, 107)',
+        inlineMarkdownBackground: 'rgb(250, 250, 250)',
+        buttonBackground: 'rgb(26, 115, 232)',
+        iconHoverBackground: 'rgba(95, 99, 104, 0.08)',
+        threadBorderColor: 'rgb(218, 220, 224)',
+        multiLineMarkdownBorderColor: 'rgb(224, 224, 224)',
+        inlineMarkdownBorder: '1px solid rgb(201, 201, 201)',
+        borders: '1px solid rgb(218, 220, 224)',
+        shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
+        searchBarActiveBackground: 'rgb(255, 255, 255)'
+    }
+};
+exports.default = defaultTheme;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var slackTheme = {
+    name: 'Slack',
+    props: {
+        primaryText: 'rgb(32, 33, 36)',
+        secondaryText: 'rgb(136, 153, 166)',
+        mentions: 'rgb(0, 121, 107)',
+        inlineMarkdownText: 'rgb(231, 232, 235)',
+        multilineMarkdownText: 'rgb(66, 66, 66)',
+        links: 'rgb(26, 115, 232)',
+        icons: 'rgba(0, 0, 0, 0.54)',
+        threadBackground: 'rgb(255, 255, 255)',
+        threadContainerBackground: 'rgb(242, 242, 242)',
+        chatTitleBackground: 'rgb(228, 247, 251)',
+        hoverBackground: 'rgb(248, 249, 250)',
+        mentionNotificationBackground: 'rgb(0, 121, 107)',
+        inlineMarkdownBackground: 'rgb(250, 250, 250)',
+        buttonBackground: 'rgb(26, 115, 232)',
+        iconHoverBackground: 'rgba(95, 99, 104, 0.08)',
+        threadBorderColor: 'rgb(218, 220, 224)',
+        multiLineMarkdownBorderColor: 'rgb(224, 224, 224)',
+        inlineMarkdownBorder: '1px solid rgb(201, 201, 201)',
+        borders: '1px solid rgb(218, 220, 224)',
+        shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
+        searchBarActiveBackground: 'rgb(255, 255, 255)'
+    },
+    sideBarBackground: '#3E103F',
+    unreadChannelColor: '#fff',
+    channelColor: '#cac4c9'
+};
+exports.default = slackTheme;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ops_1 = __webpack_require__(9);
+var utils_1 = __webpack_require__(5);
 function main() {
     ops_1.createRuleSwapList();
-    ops_1.applyTheme(dark_1.default);
+    utils_1.getAppliedTheme(function (theme) {
+        ops_1.applyTheme(theme);
+    });
 }
 window.onload = main;
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    console.log(sender.tab ?
-        "from a content script:" + sender.tab.url :
-        "from the extension");
-    if (request.themeChange) {
-        ops_1.applyTheme(request.themeChange);
-        sendResponse({ farewell: "goodbye" });
-    }
+utils_1.onThemeChange(function (theme) {
+    ops_1.applyTheme(theme);
 });
 
 
 /***/ }),
-/* 5 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6995,9 +7135,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var dom_1 = __webpack_require__(6);
-var lodash_1 = __webpack_require__(0);
-var ruleSwaps_1 = __webpack_require__(7);
+var dom_1 = __webpack_require__(10);
+var lodash_1 = __webpack_require__(2);
+var ruleSwaps_1 = __webpack_require__(11);
 function switchLogoColor(color) {
     var logoContainer = dom_1.getLogoContainer();
     if (!logoContainer) {
@@ -7020,7 +7160,10 @@ function cssRuleMatchesSwap(rule, swap) {
         //@ts-ignore
         return rule.style && rule.style[swap.prop] === i;
     });
-    return match;
+    var selectorMatch = swap.selectorTexts && lodash_1.some(swap.selectorTexts, function (i) {
+        return rule.style && rule.selectorText === i;
+    });
+    return match || selectorMatch;
 }
 function getMatchedStyleRulesForSwap(swap) {
     var matchedStyleRules = [];
@@ -7048,7 +7191,7 @@ function createRuleSwapList() {
         return lodash_1.map(swaps, function (swap) {
             return __assign({ 
                 //@ts-ignore
-                prop: swap.prop, matchedStyleRules: getMatchedStyleRulesForSwap(swap) }, (swap.transform ? { transform: swap.transform } : {}));
+                prop: swap.prop, matchedStyleRules: getMatchedStyleRulesForSwap(swap), selectorText: swap.selectorText }, (swap.transform ? { transform: swap.transform } : {}));
         });
     });
     // @ts-ignore
@@ -7056,25 +7199,24 @@ function createRuleSwapList() {
 }
 exports.createRuleSwapList = createRuleSwapList;
 function applyTheme(theme) {
-    switchLogoColor(theme.primaryText);
-    switchIconsColor(theme.icons);
-    lodash_1.each(lodash_1.keys(theme).concat(['misc']), function (themeProp) {
-        applyThemeProperty(themeProp, theme[themeProp]);
+    switchLogoColor(theme.unreadChannelColor ? theme.unreadChannelColor : theme.props.primaryText);
+    switchIconsColor(theme.props.icons);
+    lodash_1.each(lodash_1.keys(theme.props).concat(['misc']), function (themeProp) {
+        applyThemeProperty(theme, themeProp, theme.props[themeProp]);
     });
 }
 exports.applyTheme = applyTheme;
-function applyThemeProperty(themeProp, themeValue) {
+function applyThemeProperty(theme, themeProp, themeValue) {
     //@ts-ignore
     var ruleSwaps = window.googleChatThemesRuleSwapList[themeProp];
     lodash_1.each(ruleSwaps, function (swap) {
         lodash_1.each(swap.matchedStyleRules, function (rule) {
-            if (rule.selectorText === '.yg4pvb::before' && swap.initial && swap.initial[0] === 'linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)') {
-                debugger;
-            }
             if (swap.transform) {
-                return swap.transform(themeValue, rule.style);
+                return swap.transform(theme, themeProp, themeValue, rule.style);
             }
-            rule.style[swap.prop] = themeValue;
+            if (rule.style && rule.style[swap.prop]) {
+                rule.style[swap.prop] = themeValue;
+            }
         });
     });
 }
@@ -7082,7 +7224,7 @@ exports.applyThemeProperty = applyThemeProperty;
 
 
 /***/ }),
-/* 6 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7104,13 +7246,13 @@ exports.getIconSvgs = getIconSvgs;
 
 
 /***/ }),
-/* 7 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
+var ruleSwaps = {
     primaryText: [{
             prop: 'color',
             initial: ['rgb(32, 33, 36)', 'rgb(34, 34, 34)', 'rgb(60, 64, 67)']
@@ -7139,7 +7281,7 @@ exports.default = {
         {
             prop: 'color',
             initial: ['rgba(0, 0, 0, 0.54)'],
-            transform: function (themeValue, style) {
+            transform: function (theme, themeProp, themeValue, style) {
                 style.color = themeValue;
                 style.fill = themeValue;
             }
@@ -7245,19 +7387,64 @@ exports.default = {
         {
             prop: 'background',
             initial: ['linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)'],
-            transform: function (themeValue, style) {
+            transform: function (theme, themeProp, themeValue, style) {
                 return style.background = '';
             }
         },
         {
             prop: 'backgroundImage',
             initial: ['linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)'],
-            transform: function (themeValue, style) {
+            transform: function (theme, themeProp, themeValue, style) {
                 style.backgroundImage = '';
+            }
+        },
+        {
+            selectorTexts: ['.X9KLPc', '.yoV6yd', '.Riuhhf'],
+            transform: function (theme, themeProp, themeValue, style) {
+                if (theme.sideBarBackground) {
+                    style.background = theme.sideBarBackground;
+                }
+                else {
+                    style.background = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.PL5Wwe.H7du2 .t5F5nf', '.aOHsTc',],
+            transform: function (theme, themeProp, themeValue, style) {
+                if (theme.unreadChannelColor) {
+                    style.color = theme.unreadChannelColor;
+                }
+                else {
+                    style.color = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.fKz7Od'],
+            transform: function (theme, themeProp, themeValue, style) {
+                if (theme.unreadChannelColor) {
+                    style.fill = theme.unreadChannelColor;
+                }
+                else {
+                    style.fill = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.t5F5nf, .wR3Nid'],
+            transform: function (theme, themeProp, themeValue, style) {
+                if (theme.channelColor) {
+                    style.color = theme.channelColor;
+                }
+                else {
+                    style.color = '';
+                }
             }
         }
     ]
 };
+exports.default = ruleSwaps;
 
 
 /***/ })

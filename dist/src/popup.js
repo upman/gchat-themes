@@ -81,11 +81,64 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var darkTheme = {
+    name: 'Dark',
+    props: {
+        primaryText: 'rgb(231, 232, 235)',
+        secondaryText: 'rgb(136, 153, 166)',
+        mentions: 'rgb(65, 173, 240)',
+        inlineMarkdownText: 'rgb(245, 245, 245)',
+        multilineMarkdownText: 'rgb(239, 239, 239)',
+        links: 'rgb(65, 173, 240)',
+        icons: 'rgba(255, 255, 255, 0.54)',
+        threadBackground: 'rgb(25, 39, 52)',
+        threadContainerBackground: 'rgb(21, 32, 43)',
+        chatTitleBackground: 'rgb(0, 0, 0)',
+        hoverBackground: 'rgb(32, 48, 61)',
+        mentionNotificationBackground: 'rgb(65, 173, 240)',
+        inlineMarkdownBackground: 'rgb(55, 86, 115)',
+        buttonBackground: 'rgb(29, 161, 242)',
+        iconHoverBackground: 'rgba(226, 230, 234, 0.14)',
+        threadBorderColor: 'rgb(83, 102, 115)',
+        multiLineMarkdownBorderColor: 'rgb(71, 110, 146)',
+        inlineMarkdownBorder: '1px solid rgb(62, 97, 130)',
+        borders: '1px solid rgb(135, 143, 156)',
+        shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
+        searchBarActiveBackground: 'rgb(25, 39, 52)'
+    }
+};
+exports.default = darkTheme;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var dark_1 = __webpack_require__(0);
+var default_1 = __webpack_require__(6);
+var slack_1 = __webpack_require__(7);
+exports.default = {
+    'Dark Mode': dark_1.default,
+    'Default Theme': default_1.default,
+    'Slack': slack_1.default,
+};
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -6863,10 +6916,10 @@
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)(module), __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(3)(module), __webpack_require__(4)))
 
 /***/ }),
-/* 1 */
+/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -6894,7 +6947,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var g;
@@ -6920,52 +6973,144 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var darkTheme = {
-    primaryText: 'rgb(231, 232, 235)',
-    secondaryText: 'rgb(136, 153, 166)',
-    mentions: 'rgb(65, 173, 240)',
-    inlineMarkdownText: 'rgb(245, 245, 245)',
-    multilineMarkdownText: 'rgb(239, 239, 239)',
-    links: 'rgb(65, 173, 240)',
-    icons: 'rgba(255, 255, 255, 0.54)',
-    threadBackground: 'rgb(25, 39, 52)',
-    threadContainerBackground: 'rgb(21, 32, 43)',
-    chatTitleBackground: 'rgb(0, 0, 0)',
-    hoverBackground: 'rgb(32, 48, 61)',
-    mentionNotificationBackground: 'rgb(65, 173, 240)',
-    inlineMarkdownBackground: 'rgb(55, 86, 115)',
-    buttonBackground: 'rgb(29, 161, 242)',
-    iconHoverBackground: 'rgba(226, 230, 234, 0.14)',
-    threadBorderColor: 'rgb(83, 102, 115)',
-    multiLineMarkdownBorderColor: 'rgb(71, 110, 146)',
-    inlineMarkdownBorder: '1px solid rgb(62, 97, 130)',
-    borders: '1px solid rgb(135, 143, 156)',
-    shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
-    searchBarActiveBackground: 'rgb(25, 39, 52)'
-};
-exports.default = darkTheme;
+var dark_1 = __webpack_require__(0);
+var themes_1 = __webpack_require__(1);
+var APPLIED_THEME_KEY = 'appliedTheme';
+function getAppliedTheme(cb) {
+    chrome.storage.sync.get([APPLIED_THEME_KEY], function (result) {
+        if (result.appliedTheme) {
+            cb(themes_1.default[result.appliedTheme]);
+        }
+        else {
+            cb(dark_1.default);
+        }
+    });
+}
+exports.getAppliedTheme = getAppliedTheme;
+function setAppliedTheme(themeName, cb) {
+    var _a;
+    chrome.storage.sync.set((_a = {}, _a[APPLIED_THEME_KEY] = themeName, _a), function () {
+        if (cb) {
+            cb();
+        }
+    });
+}
+exports.setAppliedTheme = setAppliedTheme;
+function getThemeFromName(themeName, cb) {
+    if (themes_1.default[themeName]) {
+        return cb(themes_1.default[themeName]);
+    }
+}
+exports.getThemeFromName = getThemeFromName;
+function onThemeChange(cb) {
+    chrome.storage.onChanged.addListener(function (changed, namespace) {
+        if (changed[APPLIED_THEME_KEY]) {
+            var themeName = changed[APPLIED_THEME_KEY].newValue;
+            getThemeFromName(themeName, function (theme) {
+                cb(theme);
+            });
+        }
+    });
+}
+exports.onThemeChange = onThemeChange;
 
 
 /***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lodash_1 = __webpack_require__(0);
-var themes_1 = __webpack_require__(10);
+var defaultTheme = {
+    name: 'Default',
+    props: {
+        primaryText: 'rgb(32, 33, 36)',
+        secondaryText: 'rgb(136, 153, 166)',
+        mentions: 'rgb(0, 121, 107)',
+        inlineMarkdownText: 'rgb(231, 232, 235)',
+        multilineMarkdownText: 'rgb(66, 66, 66)',
+        links: 'rgb(26, 115, 232)',
+        icons: 'rgba(0, 0, 0, 0.54)',
+        threadBackground: 'rgb(255, 255, 255)',
+        threadContainerBackground: 'rgb(242, 242, 242)',
+        chatTitleBackground: 'rgb(228, 247, 251)',
+        hoverBackground: 'rgb(248, 249, 250)',
+        mentionNotificationBackground: 'rgb(0, 121, 107)',
+        inlineMarkdownBackground: 'rgb(250, 250, 250)',
+        buttonBackground: 'rgb(26, 115, 232)',
+        iconHoverBackground: 'rgba(95, 99, 104, 0.08)',
+        threadBorderColor: 'rgb(218, 220, 224)',
+        multiLineMarkdownBorderColor: 'rgb(224, 224, 224)',
+        inlineMarkdownBorder: '1px solid rgb(201, 201, 201)',
+        borders: '1px solid rgb(218, 220, 224)',
+        shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
+        searchBarActiveBackground: 'rgb(255, 255, 255)'
+    }
+};
+exports.default = defaultTheme;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var slackTheme = {
+    name: 'Slack',
+    props: {
+        primaryText: 'rgb(32, 33, 36)',
+        secondaryText: 'rgb(136, 153, 166)',
+        mentions: 'rgb(0, 121, 107)',
+        inlineMarkdownText: 'rgb(231, 232, 235)',
+        multilineMarkdownText: 'rgb(66, 66, 66)',
+        links: 'rgb(26, 115, 232)',
+        icons: 'rgba(0, 0, 0, 0.54)',
+        threadBackground: 'rgb(255, 255, 255)',
+        threadContainerBackground: 'rgb(242, 242, 242)',
+        chatTitleBackground: 'rgb(228, 247, 251)',
+        hoverBackground: 'rgb(248, 249, 250)',
+        mentionNotificationBackground: 'rgb(0, 121, 107)',
+        inlineMarkdownBackground: 'rgb(250, 250, 250)',
+        buttonBackground: 'rgb(26, 115, 232)',
+        iconHoverBackground: 'rgba(95, 99, 104, 0.08)',
+        threadBorderColor: 'rgb(218, 220, 224)',
+        multiLineMarkdownBorderColor: 'rgb(224, 224, 224)',
+        inlineMarkdownBorder: '1px solid rgb(201, 201, 201)',
+        borders: '1px solid rgb(218, 220, 224)',
+        shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
+        searchBarActiveBackground: 'rgb(255, 255, 255)'
+    },
+    sideBarBackground: '#3E103F',
+    unreadChannelColor: '#fff',
+    channelColor: '#cac4c9'
+};
+exports.default = slackTheme;
+
+
+/***/ }),
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var lodash_1 = __webpack_require__(2);
+var themes_1 = __webpack_require__(1);
+var utils_1 = __webpack_require__(5);
 $(document).ready(function () {
     $('#color-picker').spectrum({
         //@ts-ignore
@@ -6976,66 +7121,27 @@ $(document).ready(function () {
     var themeSelect = $('#theme-picker');
     themeSelect.change(function (event) {
         // @ts-ignore
-        var theme = themes_1.default[event.target.value];
+        var theme = event.target.value;
         if (theme) {
             // Message received in background.ts
-            chrome.runtime.sendMessage({ themeChange: theme }, function (response) {
-                console.log(response);
-            });
+            // chrome.runtime.sendMessage({themeChange: theme}, function(response) {
+            //     console.log(response);
+            // });
+            utils_1.setAppliedTheme(theme);
         }
     });
-    lodash_1.each(themes_1.default, function (theme, name) {
-        themeSelect.append($('<option>').attr('value', name).text(name));
+    utils_1.getAppliedTheme(function (theme) {
+        console.log('theme', theme);
+        lodash_1.each(themes_1.default, function (t, name) {
+            debugger;
+            var option = $('<option>').attr('value', name).text(name);
+            if (theme.name === name) {
+                option.attr('selected', '');
+            }
+            themeSelect.append(option);
+        });
     });
 });
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var dark_1 = __webpack_require__(3);
-var default_1 = __webpack_require__(11);
-exports.default = {
-    'Dark Mode': dark_1.default,
-    'Default Theme': default_1.default
-};
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var defaultTheme = {
-    primaryText: 'rgb(32, 33, 36)',
-    secondaryText: 'rgb(136, 153, 166)',
-    mentions: 'rgb(0, 121, 107)',
-    inlineMarkdownText: 'rgb(231, 232, 235)',
-    multilineMarkdownText: 'rgb(66, 66, 66)',
-    links: 'rgb(26, 115, 232)',
-    icons: 'rgba(0, 0, 0, 0.54)',
-    threadBackground: 'rgb(255, 255, 255)',
-    threadContainerBackground: 'rgb(242, 242, 242)',
-    chatTitleBackground: 'rgb(228, 247, 251)',
-    hoverBackground: 'rgb(248, 249, 250)',
-    mentionNotificationBackground: 'rgb(0, 121, 107)',
-    inlineMarkdownBackground: 'rgb(250, 250, 250)',
-    buttonBackground: 'rgb(26, 115, 232)',
-    iconHoverBackground: 'rgba(95, 99, 104, 0.08)',
-    threadBorderColor: 'rgb(218, 220, 224)',
-    multiLineMarkdownBorderColor: 'rgb(224, 224, 224)',
-    inlineMarkdownBorder: '1px solid rgb(201, 201, 201)',
-    borders: '1px solid rgb(218, 220, 224)',
-    shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
-    searchBarActiveBackground: 'rgb(255, 255, 255)'
-};
-exports.default = defaultTheme;
 
 
 /***/ })

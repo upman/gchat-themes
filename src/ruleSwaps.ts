@@ -1,4 +1,6 @@
-export default {
+import type { Theme } from './types';
+
+const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
     primaryText: [{
         prop: 'color',
         initial: ['rgb(32, 33, 36)', 'rgb(34, 34, 34)', 'rgb(60, 64, 67)']
@@ -27,7 +29,7 @@ export default {
         {
             prop: 'color',
             initial: ['rgba(0, 0, 0, 0.54)'],
-            transform: function(themeValue, style) {
+            transform: function(theme, themeProp, themeValue, style) {
                 style.color = themeValue;
                 style.fill = themeValue;
             }
@@ -133,16 +135,58 @@ export default {
         {
             prop: 'background',
             initial: ['linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)'],
-            transform: function(themeValue, style) {
+            transform: function(theme, themeProp, themeValue, style) {
                 return style.background = '';
             }
         },
         {
             prop: 'backgroundImage',
             initial: ['linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)'],
-            transform: function(themeValue, style) {
+            transform: function(theme, themeProp, themeValue, style) {
                 style.backgroundImage = '';
+            }
+        },
+        {
+            selectorTexts: ['.X9KLPc', '.yoV6yd', '.Riuhhf'],
+            transform: function(theme, themeProp, themeValue, style) {
+                if (theme.sideBarBackground) {
+                    style.background = theme.sideBarBackground;
+                } else {
+                    style.background = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.PL5Wwe.H7du2 .t5F5nf', '.aOHsTc', ],
+            transform: function(theme, themeProp, themeValue, style) {
+                if (theme.unreadChannelColor) {
+                    style.color = theme.unreadChannelColor;
+                } else {
+                    style.color = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.fKz7Od'],
+            transform: function(theme, themeProp, themeValue, style) {
+                if (theme.unreadChannelColor) {
+                    style.fill = theme.unreadChannelColor;
+                } else {
+                    style.fill = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.t5F5nf, .wR3Nid'],
+            transform: function(theme, themeProp, themeValue, style) {
+                if (theme.channelColor) {
+                    style.color = theme.channelColor;
+                } else {
+                    style.color = '';
+                }
             }
         }
     ]
-}
+};
+
+export default ruleSwaps;
