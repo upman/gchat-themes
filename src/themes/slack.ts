@@ -26,7 +26,7 @@ const slackTheme: Theme = {
         searchBarActiveBackground: 'rgb(255, 255, 255)'
     },
     sideBarBackground: '#3E103F',
-    unreadChannelColor: '#fff',
+    unreadChannelColor: '#ffffff',
     channelColor: '#cac4c9'
 };
 

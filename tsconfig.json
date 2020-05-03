@@ -1,9 +1,11 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "ES5",
+        "jsx": "react",
+        "module": "es6",
+        "target": "es6",
         "outDir": "ts-built",
-        "rootDir": "src"
+        "rootDir": ".",
+        "esModuleInterop": true
     },
     "types": [
         "chrome"

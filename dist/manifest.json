@@ -11,14 +11,14 @@
             "js": [
                 "./src/content.js"
             ],
-            "run_at": "document_idle"
+            "run_at": "document_end"
         }
     ],
     "page_action": {
         "default_icon": {
-            "16": "images/heart-16.png",
-            "24": "images/heart-24.png",
-            "32": "images/heart-32.png"
+            "16": "images/heart.png",
+            "24": "images/heart.png",
+            "32": "images/heart.png"
         },
         "default_title": "Google Chat Theme Customizer",
         "default_popup": "src/popup/popup.html"

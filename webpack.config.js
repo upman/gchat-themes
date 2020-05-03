@@ -12,10 +12,28 @@ module.exports = {
         path: path.resolve(__dirname, 'dist', 'src')
     },
     resolve: {
-        extensions: [".webpack.js", ".web.js", ".ts", ".js"]
+        extensions: [".webpack.js", ".web.js", ".ts", ".js", ".tsx"]
     },
     module: {
-        rules: [{ test: /\.ts$/, loader: "ts-loader" }]
+        rules: [
+            { test: /\.ts$/, loader: "ts-loader" },
+            {
+                test: /\.tsx$/,
+                exclude: path.join(__dirname, 'node_modules'),
+                loader: 'ts-loader',
+            },
+            {
+                test: /\.css$/i,
+                use: [
+                    "style-loader",
+                    "@teamsupercell/typings-for-css-modules-loader",
+                    {
+                        loader: "css-loader",
+                        options: { modules: true }
+                    }
+                ]
+            }
+        ],
     },
     optimization: {
         minimize: false,

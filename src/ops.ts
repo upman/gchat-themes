@@ -110,7 +110,6 @@ export function initializeRuleSwapList() {
 }
 
 export function onStyleSheetLoaded(cb) {
-    debugger;
     var loadedStyleSheetSignatures = {};
     function checkLoaded() {
         each(range(1, document.styleSheets.length), function(index) {

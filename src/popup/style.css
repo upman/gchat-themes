@@ -1,4 +1,5 @@
-html, body {
-    height: 512px;
-    width: 384px;
+.popupContainer {
+    width: 320px;
+    box-sizing: border-box;
+    padding: 20px;
 }

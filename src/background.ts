@@ -1,4 +1,7 @@
+import { initializeCustomThemes } from './storage';
+
 chrome.runtime.onInstalled.addListener(function() {
+    initializeCustomThemes();
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
         // With a new rule ...
         chrome.declarativeContent.onPageChanged.addRules([

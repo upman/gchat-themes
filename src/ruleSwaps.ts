@@ -157,7 +157,7 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
             }
         },
         {
-            selectorTexts: ['.PL5Wwe.H7du2 .t5F5nf', '.aOHsTc', ],
+            selectorTexts: ['.PL5Wwe.H7du2 .t5F5nf', '.aOHsTc', '.W9bYdf'],
             transform: function(theme, themeProp, themeValue, style) {
                 if (theme.unreadChannelColor) {
                     style.color = theme.unreadChannelColor;
