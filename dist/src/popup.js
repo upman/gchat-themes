@@ -7110,7 +7110,7 @@ exports.default = slackTheme;
 Object.defineProperty(exports, "__esModule", { value: true });
 var lodash_1 = __webpack_require__(2);
 var themes_1 = __webpack_require__(1);
-var utils_1 = __webpack_require__(5);
+var storage_1 = __webpack_require__(5);
 $(document).ready(function () {
     $('#color-picker').spectrum({
         //@ts-ignore
@@ -7127,10 +7127,10 @@ $(document).ready(function () {
             // chrome.runtime.sendMessage({themeChange: theme}, function(response) {
             //     console.log(response);
             // });
-            utils_1.setAppliedTheme(theme);
+            storage_1.setAppliedTheme(theme);
         }
     });
-    utils_1.getAppliedTheme(function (theme) {
+    storage_1.getAppliedTheme(function (theme) {
         console.log('theme', theme);
         lodash_1.each(themes_1.default, function (t, name) {
             debugger;

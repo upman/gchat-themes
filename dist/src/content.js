@@ -7104,15 +7104,18 @@ exports.default = slackTheme;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var ops_1 = __webpack_require__(9);
-var utils_1 = __webpack_require__(5);
+var storage_1 = __webpack_require__(5);
 function main() {
-    ops_1.createRuleSwapList();
-    utils_1.getAppliedTheme(function (theme) {
-        ops_1.applyTheme(theme);
+    ops_1.initializeRuleSwapList();
+    ops_1.onStyleSheetLoaded(function (styleSheet) {
+        ops_1.addRuleSwaps(styleSheet);
+        storage_1.getAppliedTheme(function (theme) {
+            ops_1.applyTheme(theme);
+        });
     });
 }
 window.onload = main;
-utils_1.onThemeChange(function (theme) {
+storage_1.onThemeChange(function (theme) {
     ops_1.applyTheme(theme);
 });
 
@@ -7165,39 +7168,6 @@ function cssRuleMatchesSwap(rule, swap) {
     });
     return match || selectorMatch;
 }
-function getMatchedStyleRulesForSwap(swap) {
-    var matchedStyleRules = [];
-    lodash_1.each(lodash_1.range(1, document.styleSheets.length), function (index) {
-        var cssRules;
-        try {
-            // @ts-ignore
-            cssRules = document.styleSheets[index].cssRules;
-        }
-        catch (e) {
-            // Cannot read external stylesheet
-            return;
-        }
-        //@ts-ignore
-        lodash_1.each(cssRules, function (rule) {
-            if (cssRuleMatchesSwap(rule, swap)) {
-                matchedStyleRules.push(rule);
-            }
-        });
-    });
-    return matchedStyleRules;
-}
-function createRuleSwapList() {
-    var ruleSwapList = lodash_1.mapValues(ruleSwaps_1.default, function (swaps) {
-        return lodash_1.map(swaps, function (swap) {
-            return __assign({ 
-                //@ts-ignore
-                prop: swap.prop, matchedStyleRules: getMatchedStyleRulesForSwap(swap), selectorText: swap.selectorText }, (swap.transform ? { transform: swap.transform } : {}));
-        });
-    });
-    // @ts-ignore
-    window.googleChatThemesRuleSwapList = ruleSwapList;
-}
-exports.createRuleSwapList = createRuleSwapList;
 function applyTheme(theme) {
     switchLogoColor(theme.unreadChannelColor ? theme.unreadChannelColor : theme.props.primaryText);
     switchIconsColor(theme.props.icons);
@@ -7221,6 +7191,75 @@ function applyThemeProperty(theme, themeProp, themeValue) {
     });
 }
 exports.applyThemeProperty = applyThemeProperty;
+function getMatchedStyleRules(swap, styleSheet) {
+    var matchedStyleRules = [];
+    var cssRules;
+    try {
+        // @ts-ignore
+        cssRules = styleSheet.cssRules;
+    }
+    catch (e) {
+        // Cannot read external stylesheet
+        return matchedStyleRules;
+    }
+    //@ts-ignore
+    lodash_1.each(cssRules, function (rule) {
+        if (cssRuleMatchesSwap(rule, swap)) {
+            matchedStyleRules.push(rule);
+        }
+    });
+    return matchedStyleRules;
+}
+exports.getMatchedStyleRules = getMatchedStyleRules;
+function addRuleSwaps(styleSheet) {
+    // @ts-ignore
+    lodash_1.mapValues(window.googleChatThemesRuleSwapList, function (swaps) {
+        return lodash_1.map(swaps, function (swap) {
+            var newStyleRules = getMatchedStyleRules(swap.swap, styleSheet);
+            swap.matchedStyleRules = swap.matchedStyleRules.concat(newStyleRules);
+        });
+    });
+}
+exports.addRuleSwaps = addRuleSwaps;
+function initializeRuleSwapList() {
+    var ruleSwapList = lodash_1.mapValues(ruleSwaps_1.default, function (swaps) {
+        return lodash_1.map(swaps, function (swap) {
+            return __assign({ swap: swap, 
+                //@ts-ignore
+                prop: swap.prop, matchedStyleRules: [], selectorText: swap.selectorText }, (swap.transform ? { transform: swap.transform } : {}));
+        });
+    });
+    // @ts-ignore
+    window.googleChatThemesRuleSwapList = ruleSwapList;
+}
+exports.initializeRuleSwapList = initializeRuleSwapList;
+function onStyleSheetLoaded(cb) {
+    debugger;
+    var loadedStyleSheetSignatures = {};
+    function checkLoaded() {
+        lodash_1.each(lodash_1.range(1, document.styleSheets.length), function (index) {
+            var cssRules;
+            try {
+                // @ts-ignore
+                cssRules = document.styleSheets[index].cssRules;
+            }
+            catch (e) {
+                // Cannot read external stylesheet
+                return;
+            }
+            var selectors = lodash_1.map(cssRules, function (rule) {
+                return rule.selectorText ? rule.selectorText : '';
+            }).join('');
+            if (!loadedStyleSheetSignatures[selectors]) {
+                loadedStyleSheetSignatures[selectors] = true;
+                cb(document.styleSheets[index]);
+            }
+        });
+    }
+    checkLoaded();
+    setInterval(checkLoaded, 3000);
+}
+exports.onStyleSheetLoaded = onStyleSheetLoaded;
 
 
 /***/ }),
@@ -7399,7 +7438,7 @@ var ruleSwaps = {
             }
         },
         {
-            selectorTexts: ['.X9KLPc', '.yoV6yd', '.Riuhhf'],
+            selectorTexts: ['.X9KLPc', '.yoV6yd', '.Riuhhf', '.PGrLhd'],
             transform: function (theme, themeProp, themeValue, style) {
                 if (theme.sideBarBackground) {
                     style.background = theme.sideBarBackground;

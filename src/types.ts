@@ -26,4 +26,5 @@ export type Theme = {
     sideBarBackground?: string,
     unreadChannelColor?: string,
     channelColor?: string,
+    isCustom?: boolean
 }

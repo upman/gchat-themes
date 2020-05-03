@@ -37,46 +37,6 @@ function cssRuleMatchesSwap(rule, swap) {
     return match || selectorMatch;
 }
 
-function getMatchedStyleRulesForSwap(swap) {
-    var matchedStyleRules = [];
-    each(range(1, document.styleSheets.length), function(index) {
-        var cssRules;
-        try {
-            // @ts-ignore
-            cssRules = document.styleSheets[index].cssRules;
-        } catch(e) {
-            // Cannot read external stylesheet
-            return;
-        }
-        //@ts-ignore
-        each(cssRules, function(rule) {
-            if (cssRuleMatchesSwap(rule, swap)) {
-                matchedStyleRules.push(rule);
-            }
-        });
-    });
-
-    return matchedStyleRules
-}
-
-export function createRuleSwapList() {
-    const ruleSwapList = mapValues(ruleSwaps, function(swaps) {
-        return map(swaps, function(swap) {
-            return {
-                //@ts-ignore
-                prop: swap.prop,
-                matchedStyleRules: getMatchedStyleRulesForSwap(swap),
-                selectorText: swap.selectorText,
-                //@ts-ignore
-                ...(swap.transform ? { transform: swap.transform } : {})
-            }
-        });
-    });
-
-    // @ts-ignore
-    window.googleChatThemesRuleSwapList = ruleSwapList;
-}
-
 export function applyTheme(theme: Theme) {
     switchLogoColor(theme.unreadChannelColor ? theme.unreadChannelColor : theme.props.primaryText);
     switchIconsColor(theme.props.icons);
@@ -98,4 +58,81 @@ export function applyThemeProperty(theme: Theme, themeProp, themeValue) {
             }
         });
     });
+}
+
+export function getMatchedStyleRules(swap, styleSheet) {
+    var matchedStyleRules = [];
+    var cssRules;
+    try {
+        // @ts-ignore
+        cssRules = styleSheet.cssRules;
+    } catch(e) {
+        // Cannot read external stylesheet
+        return matchedStyleRules;
+    }
+    //@ts-ignore
+    each(cssRules, function(rule) {
+        if (cssRuleMatchesSwap(rule, swap)) {
+            matchedStyleRules.push(rule);
+        }
+    });
+
+    return matchedStyleRules;
+}
+
+export function addRuleSwaps(styleSheet) {
+    // @ts-ignore
+    mapValues(window.googleChatThemesRuleSwapList, function(swaps) {
+        return map(swaps, function(swap) {
+            var newStyleRules = getMatchedStyleRules(swap.swap, styleSheet);
+            swap.matchedStyleRules = swap.matchedStyleRules.concat(newStyleRules);
+        });
+    });
+}
+
+export function initializeRuleSwapList() {
+    const ruleSwapList = mapValues(ruleSwaps, function(swaps) {
+        return map(swaps, function(swap) {
+            return {
+                swap: swap,
+                //@ts-ignore
+                prop: swap.prop,
+                matchedStyleRules: [],
+                selectorText: swap.selectorText,
+                //@ts-ignore
+                ...(swap.transform ? { transform: swap.transform } : {})
+            }
+        });
+    });
+
+    // @ts-ignore
+    window.googleChatThemesRuleSwapList = ruleSwapList;
+}
+
+export function onStyleSheetLoaded(cb) {
+    debugger;
+    var loadedStyleSheetSignatures = {};
+    function checkLoaded() {
+        each(range(1, document.styleSheets.length), function(index) {
+            var cssRules;
+            try {
+                // @ts-ignore
+                cssRules = document.styleSheets[index].cssRules;
+            } catch(e) {
+                // Cannot read external stylesheet
+                return;
+            }
+
+            var selectors = map(cssRules, function(rule) {
+                return rule.selectorText ? rule.selectorText : '';
+            }).join('');
+
+            if (!loadedStyleSheetSignatures[selectors]) {
+                loadedStyleSheetSignatures[selectors] = true;
+                cb(document.styleSheets[index]);
+            }
+        });
+    }
+    checkLoaded();
+    setInterval(checkLoaded, 3000);
 }

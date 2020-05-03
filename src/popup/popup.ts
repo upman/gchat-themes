@@ -1,6 +1,6 @@
 import { each } from 'lodash';
 import themes from '../themes';
-import { getAppliedTheme, setAppliedTheme } from '../utils';
+import { getAppliedTheme, setAppliedTheme } from '../storage';
 
 $(document).ready(function() {
     $('#color-picker').spectrum({

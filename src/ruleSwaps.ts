@@ -147,7 +147,7 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
             }
         },
         {
-            selectorTexts: ['.X9KLPc', '.yoV6yd', '.Riuhhf'],
+            selectorTexts: ['.X9KLPc', '.yoV6yd', '.Riuhhf', '.PGrLhd'],
             transform: function(theme, themeProp, themeValue, style) {
                 if (theme.sideBarBackground) {
                     style.background = theme.sideBarBackground;

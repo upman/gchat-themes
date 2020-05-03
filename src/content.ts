@@ -1,10 +1,13 @@
-import { createRuleSwapList,  applyTheme } from './ops';
-import { getAppliedTheme, onThemeChange } from './utils';
+import { applyTheme, initializeRuleSwapList, onStyleSheetLoaded, addRuleSwaps } from './ops';
+import { getAppliedTheme, onThemeChange } from './storage';
 
 function main() {
-    createRuleSwapList();
-    getAppliedTheme(function (theme) {
-        applyTheme(theme);
+    initializeRuleSwapList();
+    onStyleSheetLoaded(function(styleSheet) {
+        addRuleSwaps(styleSheet);
+        getAppliedTheme(function (theme) {
+            applyTheme(theme);
+        });
     });
 }
 
