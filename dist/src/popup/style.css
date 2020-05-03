@@ -1,5 +1,71 @@
+html, body {
+    overflow: scroll;
+    height: 512px;
+}
+
 .popupContainer {
     width: 320px;
+    min-height: 484px;
     box-sizing: border-box;
     padding: 20px;
+}
+
+.propertyBlock {
+    padding-top: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 38px;
+    position: relative;
+}
+
+.propertyLabel {
+    display: flex;
+    padding-right: 5px;
+    flex-basis: 40%;
+    white-space: pre-wrap;
+    align-items: center;
+}
+
+.propertyValue {
+    flex-basis: 60%;
+    display: flex;
+    width: 80px;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    overflow: hidden;
+    align-items: center;
+}
+
+.colorSwatch {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    border-right: 1px solid rgb(204, 204, 204);
+}
+
+.colorText {
+    padding: 4px;
+}
+
+.propInput {
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+.colorPicker {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 2;
+}
+
+.cover {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1;
 }

@@ -1,6 +1,14 @@
 declare namespace StyleCssModule {
   export interface IStyleCss {
+    colorPicker: string;
+    colorSwatch: string;
+    colorText: string;
+    cover: string;
     popupContainer: string;
+    propInput: string;
+    propertyBlock: string;
+    propertyLabel: string;
+    propertyValue: string;
   }
 }
 

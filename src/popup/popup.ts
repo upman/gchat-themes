@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom';
 import PopupContainer from './popupContainer';
 import { getCustomThemes, getAppliedTheme } from '../storage';
 
-$(document).ready(function() {
-
+document.addEventListener('DOMContentLoaded', function() {
     getCustomThemes(function(customThemes) {
         getAppliedTheme(function(appliedTheme) {
             var container = React.createElement(PopupContainer, {

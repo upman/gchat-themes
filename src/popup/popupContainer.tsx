@@ -1,10 +1,13 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactSelect from 'react-select';
 
 import { Theme } from '../types';
 import Themes from '../themes';
 import { setAppliedTheme } from '../storage';
 import styles from './style.css';
+import ThemeMeta from '../themes/themeMeta';
+// @ts-ignore
+import { ChromePicker } from 'react-color';
 
 type Props = {
     appliedTheme: Theme,
@@ -17,7 +20,8 @@ type valueType = {
 };
 
 type State = Props & {
-    appliedThemeValue: valueType
+    appliedThemeValue: valueType,
+    colorPickerActive: string | null
 };
 
 export default class PopupContainer extends Component<Props, State> {
@@ -31,7 +35,8 @@ export default class PopupContainer extends Component<Props, State> {
                 label: props.appliedTheme.name,
                 value: props.appliedTheme.name
             },
-            appliedTheme: props.appliedTheme
+            appliedTheme: props.appliedTheme,
+            colorPickerActive: null
         };
     }
 
@@ -65,10 +70,83 @@ export default class PopupContainer extends Component<Props, State> {
                 />
                 {
                     appliedTheme && appliedTheme.isCustom && (
-                        <span>CUSTOM!</span>
+                        Object.keys(ThemeMeta).map((metaKey) => {
+                            const propertyValue = appliedTheme.props[metaKey] || appliedTheme[metaKey];
+                            const propertyType = ThemeMeta[metaKey].type;
+                            return (
+                                <div className={styles.propertyBlock}>
+                                    <div className={styles.propertyLabel}>{ThemeMeta[metaKey].label}</div>
+                                    <div className={styles.propertyValue}>
+                                        {
+                                            propertyType === 'color' ?
+                                                (
+                                                    <Fragment>
+                                                        <span
+                                                            className={styles.colorSwatch}
+                                                            style={{backgroundColor: propertyValue}}
+                                                            onClick={() => this.setState({
+                                                                colorPickerActive: metaKey
+                                                            })}
+                                                        ></span>
+                                                        <span className={styles.colorText}>
+                                                            {propertyValue}
+                                                        </span>
+                                                    </Fragment>
+                                                ):
+                                                (<input className={styles.propInput} value={propertyValue}></input>)
+                                        }
+                                        {
+                                            this.state.colorPickerActive && this.state.colorPickerActive === metaKey && (
+                                                <ChromePickerWrapper
+                                                    onClose={() => this.setState({ colorPickerActive: null })}
+                                                    color={propertyValue}
+                                                />
+                                            )
+                                        }
+                                    </div>
+
+                                </div>
+                            )
+                        })
                     )
                 }
             </div>
+        );
+    }
+}
+
+export class ChromePickerWrapper extends Component<{ color: string, onClose: () => void }> {
+    colorPickerRef: React.RefObject<HTMLDivElement>;
+    constructor(props) {
+        super(props);
+        this.colorPickerRef = React.createRef();
+    }
+
+    componentDidMount() {
+        if (this.colorPickerRef.current) {
+            this.colorPickerRef.current.scrollIntoView({
+                block: 'nearest'
+            });
+        }
+    }
+
+    handleCoverClick = (event) => {
+        this.props.onClose();
+        const elementUnderCover = document.elementFromPoint(event.clientX, event.clientY);
+        if (elementUnderCover) {
+            // @ts-ignore
+            elementUnderCover.click();
+        }
+    }
+
+    render() {
+        return (
+            <Fragment>
+                <div className={styles.colorPicker} ref={this.colorPickerRef}>
+                    <ChromePicker color={this.props.color}/>
+                </div>
+                <div className={styles.cover} onClick={this.handleCoverClick}/>
+            </Fragment>
         );
     }
 }
