@@ -1,7 +1,6 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-
-module.exports = {
+import path from 'path';
+import CopyPlugin from 'copy-webpack-plugin';
+let configuration = {
     entry: {
         "content": "./src/content.ts",
         "background": "./src/background.ts",
@@ -12,7 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist', 'src')
     },
     resolve: {
-        extensions: [".webpack.js", ".web.js", ".ts", ".js", ".tsx"]
+        extensions: [".webpack.ts", ".web.js", ".ts", ".js", ".tsx"]
     },
     module: {
         rules: [
@@ -41,19 +40,20 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin([
-            { from: 'images', to: 'images', transformPath: function(targetPath) {
-                return path.join('..', targetPath);
-            }},
-            { from: 'manifest.json', to: 'manifest.json', transformPath: function(targetPath) {
-                return path.join('..', targetPath);
-            } },
-            { from: 'src/popup/popup.html', to: 'src/popup/popup.html', transformPath: function(targetPath) {
-                return path.join('..', targetPath);
-            } },
-            { from: 'src/popup/style.css', to: 'src/popup/style.css', transformPath: function(targetPath) {
-                return path.join('..', targetPath);
-            } },
+            { from: 'images', to: 'images', transformPath: function (targetPath) {
+                    return path.join('..', targetPath);
+                } },
+            { from: 'manifest.json', to: 'manifest.json', transformPath: function (targetPath) {
+                    return path.join('..', targetPath);
+                } },
+            { from: 'src/popup/popup.html', to: 'src/popup/popup.html', transformPath: function (targetPath) {
+                    return path.join('..', targetPath);
+                } },
+            { from: 'src/popup/style.css', to: 'src/popup/style.css', transformPath: function (targetPath) {
+                    return path.join('..', targetPath);
+                } },
         ]),
     ],
     watch: true,
-}
+};
+export default configuration;

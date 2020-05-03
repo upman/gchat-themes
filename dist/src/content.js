@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -17194,7 +17194,7 @@
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(7), __webpack_require__(8)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(6), __webpack_require__(7)(module)))
 
 /***/ }),
 
@@ -17236,7 +17236,7 @@ const slackTheme = {
 
 /***/ }),
 
-/***/ 25:
+/***/ 24:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17572,7 +17572,7 @@ function onStyleSheetLoaded(cb) {
 }
 
 // EXTERNAL MODULE: ./src/storage.ts
-var storage = __webpack_require__(5);
+var storage = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/content.ts
 
@@ -17674,7 +17674,7 @@ var slack = __webpack_require__(2);
 
 /***/ }),
 
-/***/ 5:
+/***/ 4:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17760,7 +17760,7 @@ function onThemeChange(cb) {
 
 /***/ }),
 
-/***/ 7:
+/***/ 6:
 /***/ (function(module, exports) {
 
 var g;
@@ -17787,7 +17787,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 8:
+/***/ 7:
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
