@@ -1,13 +1,15 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, ChangeEvent } from 'react';
 import ReactSelect from 'react-select';
+// @ts-ignore
+import { ChromePicker } from 'react-color';
+import { debounce } from 'lodash';
+import cx from 'classnames';
 
 import { Theme } from '../types';
 import Themes from '../themes';
-import { setAppliedTheme } from '../storage';
+import { setAppliedTheme, writeCustomThemes } from '../storage';
 import styles from './style.css';
 import ThemeMeta from '../themes/themeMeta';
-// @ts-ignore
-import { ChromePicker } from 'react-color';
 
 type Props = {
     appliedTheme: Theme,
@@ -19,16 +21,21 @@ type valueType = {
     value: string
 };
 
+type RGBA = { r: number, g: number, b: number, a: number};
 type State = Props & {
     appliedThemeValue: valueType,
     colorPickerActive: string | null
 };
 
+function rgbaToString(rgba: RGBA): string {
+    const { r, g, b, a} = rgba;
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
+}
+
 export default class PopupContainer extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
-        console.log(props);
         this.state = {
             ...props,
             appliedThemeValue: {
@@ -48,6 +55,38 @@ export default class PopupContainer extends Component<Props, State> {
         });
     }
 
+    writeCustomThemeChange = debounce(() => {
+        const customThemeIndex = this.props.customThemes.findIndex((ct) => ct.name === this.props.appliedTheme.name);
+        this.props.customThemes[customThemeIndex] = this.state.appliedTheme;
+        writeCustomThemes(this.props.customThemes);
+    }, 300);
+
+    handleCustomColorChange = (color: RGBA, metaKey: string) => {
+        const { appliedTheme } = this.state;
+
+        appliedTheme.props[metaKey] ?
+            appliedTheme.props[metaKey] = rgbaToString(color) :
+            appliedTheme[metaKey] = rgbaToString(color);
+        this.setState({
+            appliedTheme
+        });
+        this.writeCustomThemeChange();
+    }
+
+    handleTextFieldChange = (e: ChangeEvent<HTMLInputElement>, metaKey: string) => {
+        const { appliedTheme } = this.state;
+
+        appliedTheme.props[metaKey] ?
+            appliedTheme.props[metaKey] = e.target.value :
+            appliedTheme[metaKey] = e.target.value;
+
+        this.setState({
+            appliedTheme
+        });
+
+        this.writeCustomThemeChange();
+    }
+
     render() {
         const { appliedThemeValue, appliedTheme } = this.state;
         const themeOptions = Object.keys(Themes).map(function(themeName: string) {
@@ -59,8 +98,11 @@ export default class PopupContainer extends Component<Props, State> {
                 label: customTheme.name
             }
         });
+        const isCustomTheme = appliedTheme && appliedTheme.isCustom;
         return (
-            <div className={styles.popupContainer}>
+            <div className={cx(styles.popupContainer, {
+                [styles.customThemeContainer]: isCustomTheme
+            })}>
                 <ReactSelect
                     id="theme-picker"
                     onChange={this.onThemeChange}
@@ -69,7 +111,7 @@ export default class PopupContainer extends Component<Props, State> {
                     autoBlur
                 />
                 {
-                    appliedTheme && appliedTheme.isCustom && (
+                    isCustomTheme && (
                         Object.keys(ThemeMeta).map((metaKey) => {
                             const propertyValue = appliedTheme.props[metaKey] || appliedTheme[metaKey];
                             const propertyType = ThemeMeta[metaKey].type;
@@ -93,13 +135,14 @@ export default class PopupContainer extends Component<Props, State> {
                                                         </span>
                                                     </Fragment>
                                                 ):
-                                                (<input className={styles.propInput} value={propertyValue}></input>)
+                                                (<input className={styles.propInput} value={propertyValue} onChange={(e: ChangeEvent<HTMLInputElement>) => this.handleTextFieldChange(e, metaKey)}></input>)
                                         }
                                         {
                                             this.state.colorPickerActive && this.state.colorPickerActive === metaKey && (
                                                 <ChromePickerWrapper
                                                     onClose={() => this.setState({ colorPickerActive: null })}
                                                     color={propertyValue}
+                                                    onChange={({ rgb }: { rgb: RGBA }) => this.handleCustomColorChange(rgb, metaKey)}
                                                 />
                                             )
                                         }
@@ -110,12 +153,15 @@ export default class PopupContainer extends Component<Props, State> {
                         })
                     )
                 }
+                <div className={styles.credit}>
+                    Badge icon by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                </div>
             </div>
         );
     }
 }
 
-export class ChromePickerWrapper extends Component<{ color: string, onClose: () => void }> {
+export class ChromePickerWrapper extends Component<{ color: string, onClose: () => void, onChange: (color: { rgb: { r: number, g: number, b: number, a: number} }) => void }> {
     colorPickerRef: React.RefObject<HTMLDivElement>;
     constructor(props) {
         super(props);
@@ -143,7 +189,7 @@ export class ChromePickerWrapper extends Component<{ color: string, onClose: () 
         return (
             <Fragment>
                 <div className={styles.colorPicker} ref={this.colorPickerRef}>
-                    <ChromePicker color={this.props.color}/>
+                    <ChromePicker color={this.props.color} onChange={this.props.onChange}/>
                 </div>
                 <div className={styles.cover} onClick={this.handleCoverClick}/>
             </Fragment>

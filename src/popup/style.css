@@ -1,11 +1,11 @@
-html, body {
-    overflow: scroll;
+.popupContainer.customThemeContainer {
+    width: 340px;
     height: 512px;
 }
 
 .popupContainer {
-    width: 320px;
-    min-height: 484px;
+    width: 340px;
+    height: 100px;
     box-sizing: border-box;
     padding: 20px;
 }
@@ -68,4 +68,10 @@ html, body {
     bottom: 0px;
     left: 0px;
     z-index: 1;
+}
+
+.credit {
+    text-align: center;
+    padding: 16px 0;
+    font-size: 8px;
 }

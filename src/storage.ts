@@ -1,8 +1,10 @@
 import themes from './themes';
 
 import Slack from './themes/slack';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, each, range } from 'lodash';
 import { Theme } from './types';
+import ThemeMeta from './themes/themeMeta';
+import { applyThemeProperty, applyTheme } from './ops';
 
 const APPLIED_THEME_KEY = 'appliedTheme';
 const CUSTOM_THEMES_KEY = 'customThemes';
@@ -32,6 +34,10 @@ export function initializeCustomThemes() {
             chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemesObj });
         }
     });
+}
+
+export function writeCustomThemes(customThemes) {
+    chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemes});
 }
 
 export function getCustomThemes(cb) {
@@ -80,6 +86,32 @@ export function onThemeChange(cb) {
             const themeName = changed[APPLIED_THEME_KEY].newValue;
             getThemeFromName(themeName, function(theme) {
                 cb(theme);
+            });
+        }
+    });
+}
+
+export function handleCustomThemeChanges() {
+    chrome.storage.onChanged.addListener(function(changed) {
+        if(changed[CUSTOM_THEMES_KEY]) {
+            each(range(0, changed[CUSTOM_THEMES_KEY].oldValue.length), function(index) {
+                const oldCustomTheme = changed[CUSTOM_THEMES_KEY].oldValue[index];
+                const newCustomTheme = changed[CUSTOM_THEMES_KEY].newValue[index];
+                each(Object.keys(ThemeMeta), metaKey => {
+                    if (
+                        oldCustomTheme[metaKey] &&
+                        oldCustomTheme[metaKey] !== newCustomTheme[metaKey]
+                    ) {
+                        applyThemeProperty(newCustomTheme, 'misc', newCustomTheme[metaKey]);
+                    }
+                    if (
+                        oldCustomTheme.props[metaKey] &&
+                        oldCustomTheme.props[metaKey] !== newCustomTheme.props[metaKey]
+                    ) {
+                        applyThemeProperty(newCustomTheme, metaKey, newCustomTheme.props[metaKey]);
+                        applyThemeProperty(newCustomTheme, 'misc', null);
+                    }
+                });
             });
         }
     });

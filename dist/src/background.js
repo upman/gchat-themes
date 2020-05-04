@@ -81,41 +81,12 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 96);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 11:
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
-/***/ 2:
+/***/ 1:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17223,39 +17194,174 @@ module.exports = function(module) {
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8), __webpack_require__(11)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(22), __webpack_require__(17)(module)))
 
 /***/ }),
 
-/***/ 23:
+/***/ 12:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-
-chrome.runtime.onInstalled.addListener(function () {
-    Object(_storage__WEBPACK_IMPORTED_MODULE_0__[/* initializeCustomThemes */ "c"])();
-    chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
-        // With a new rule ...
-        chrome.declarativeContent.onPageChanged.addRules([
-            {
-                conditions: [
-                    new chrome.declarativeContent.PageStateMatcher({
-                        pageUrl: { urlContains: 'chat.google.com' },
-                    })
-                ],
-                // And shows the extension's page action.
-                actions: [new chrome.declarativeContent.ShowPageAction()]
-            }
-        ]);
-    });
-});
+var themeMeta = {
+    primaryText: {
+        type: 'color',
+        label: 'Primary Text'
+    },
+    secondaryText: {
+        type: 'color',
+        label: 'Secondary Text'
+    },
+    mentions: {
+        type: 'color',
+        label: 'Mentions Text'
+    },
+    mentionNotificationBackground: {
+        type: 'color',
+        label: 'Your Mention background'
+    },
+    inlineMarkdownText: {
+        type: 'color',
+        label: 'Inline Markdown'
+    },
+    multilineMarkdownText: {
+        type: 'color',
+        label: 'Multi-line Markdown'
+    },
+    links: {
+        type: 'color',
+        label: 'Links'
+    },
+    icons: {
+        type: 'color',
+        label: 'Icons'
+    },
+    threadBackground: {
+        type: 'color',
+        label: 'Chat thread background'
+    },
+    inlineMarkdownBackground: {
+        type: 'color',
+        label: 'Inline Markdown Background'
+    },
+    threadContainerBackground: {
+        type: 'color',
+        label: 'Thread Container Background'
+    },
+    chatTitleBackground: {
+        type: 'color',
+        label: 'Active Chat Name Background'
+    },
+    hoverBackground: {
+        type: 'color',
+        label: 'Hover Background'
+    },
+    buttonBackground: {
+        type: 'color',
+        label: 'Button Background'
+    },
+    iconHoverBackground: {
+        type: 'color',
+        label: 'Icon hover color'
+    },
+    threadBorderColor: {
+        type: 'color',
+        label: 'Chat thread border color'
+    },
+    multiLineMarkdownBorderColor: {
+        type: 'color',
+        label: 'Multi-line Markdown Border color'
+    },
+    inlineMarkdownBorder: {
+        type: 'text',
+        label: 'Inline Markdown Border color'
+    },
+    borders: {
+        type: 'text',
+        label: 'Other Borders'
+    },
+    shadows: {
+        type: 'text',
+        label: 'Shadows'
+    },
+    searchBarActiveBackground: {
+        type: 'color',
+        label: 'Chat title search background'
+    },
+    sideBarBackground: {
+        type: 'color',
+        label: 'Sidebar background'
+    },
+    unreadChannelColor: {
+        type: 'color',
+        label: 'Unread Channel title color'
+    },
+    channelColor: {
+        type: 'color',
+        label: 'Channel title color'
+    }
+};
+/* harmony default export */ __webpack_exports__["a"] = (themeMeta);
 
 
 /***/ }),
 
-/***/ 3:
+/***/ 17:
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ 22:
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 4:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17293,7 +17399,352 @@ const slackTheme = {
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ applyTheme; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ applyThemeProperty; });
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ addRuleSwaps; });
+__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ initializeRuleSwapList; });
+__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ onStyleSheetLoaded; });
+
+// UNUSED EXPORTS: getMatchedStyleRules
+
+// CONCATENATED MODULE: ./src/dom.ts
+const logoContainerSelector = 'svg > g:nth-child(2) > g > g > g > g > g > g > g > g';
+const iconSvgSelector = 'body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span svg,' +
+    'c-wiz[data-node-index] > div:nth-child(1) > span:nth-child(2) > span > svg, ' +
+    'c-wiz > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) svg, ' +
+    'c-wiz > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1) svg';
+function getLogoContainer() {
+    return document.querySelector(logoContainerSelector);
+}
+function getIconSvgs() {
+    return document.querySelectorAll(iconSvgSelector);
+}
+
+// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
+var lodash = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/ruleSwaps.ts
+const ruleSwaps_ruleSwaps = {
+    primaryText: [{
+            prop: 'color',
+            initial: ['rgb(32, 33, 36)', 'rgb(34, 34, 34)', 'rgb(60, 64, 67)']
+        }],
+    secondaryText: [{
+            prop: 'color',
+            initial: ['rgb(95, 99, 104)']
+        }],
+    mentions: [{
+            prop: 'color',
+            initial: ['rgb(0, 121, 107)']
+        }],
+    inlineMarkdownText: [{
+            prop: 'color',
+            initial: ['rgb(231, 232, 235)']
+        }],
+    multilineMarkdownText: [{
+            prop: 'color',
+            initial: ['rgb(66, 66, 66)']
+        }],
+    links: [{
+            prop: 'color',
+            initial: ['rgb(26, 115, 232)']
+        }],
+    icons: [
+        {
+            prop: 'color',
+            initial: ['rgba(0, 0, 0, 0.54)'],
+            transform: function (theme, themeProp, themeValue, style) {
+                style.color = themeValue;
+                style.fill = themeValue;
+            }
+        },
+        {
+            prop: 'fill',
+            initial: ['rgb(32, 33, 36)']
+        }
+    ],
+    threadBackground: [{
+            prop: 'backgroundColor',
+            initial: ['rgb(255, 255, 255)']
+        }],
+    threadContainerBackground: [
+        {
+            prop: 'backgroundColor',
+            initial: ['rgb(242, 242, 242)']
+        },
+        {
+            // Account Dialog managed by dialog in accounts dropdown
+            prop: 'background',
+            intial: ['rgb(232, 240, 254)']
+        }
+    ],
+    chatTitleBackground: [{
+            prop: 'backgroundColor',
+            initial: ['rgb(228, 247, 251)']
+        }],
+    hoverBackground: [
+        {
+            prop: 'backgroundColor',
+            initial: ['rgb(248, 249, 250)']
+        },
+        {
+            //Account drop down hover background
+            prop: 'backgroundColor',
+            initial: ['rgb(247, 248, 248)']
+        }
+    ],
+    mentionNotificationBackground: [{
+            prop: 'backgroundColor',
+            initial: ['rgb(0, 121, 107)']
+        }],
+    inlineMarkdownBackground: [
+        {
+            prop: 'backgroundColor',
+            initial: ['rgb(250, 250, 250)']
+        },
+        {
+            // Chat number of members bubble
+            prop: 'backgroundColor',
+            initial: ['rgb(241, 243, 244)']
+        }
+    ],
+    buttonBackground: [{
+            prop: 'backgroundColor',
+            initial: ['rgb(26, 115, 232)']
+        }],
+    iconHoverBackground: [{
+            prop: 'backgroundColor',
+            initial: ['rgba(95, 99, 104, 0.08)']
+        }],
+    threadBorderColor: [{
+            prop: 'borderColor',
+            initial: ['rgb(218, 220, 224)']
+        }],
+    multiLineMarkdownBorderColor: [{
+            prop: 'borderColor',
+            initial: ['rgb(224, 224, 224)']
+        }],
+    inlineMarkdownBorder: [{
+            prop: 'border',
+            initial: ['1px solid rgb(201, 201, 201)']
+        }],
+    borders: [
+        {
+            prop: 'borderBottom',
+            initial: ['1px solid rgb(218, 220, 224)']
+        },
+        {
+            prop: 'borderRight',
+            initial: ['1px solid rgb(218, 220, 224)']
+        }
+    ],
+    shadows: [{
+            prop: 'boxShadow',
+            initial: [
+                'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
+                'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px'
+            ]
+        }],
+    searchBarActiveBackground: [
+        {
+            prop: 'background',
+            initial: ['rgb(255, 255, 255)']
+        },
+        {
+            prop: 'backgroundColor',
+            initial: ['rgba(255, 255, 255, 0.7)']
+        }
+    ],
+    misc: [
+        {
+            prop: 'background',
+            initial: ['linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)'],
+            transform: function (theme, themeProp, themeValue, style) {
+                return style.background = '';
+            }
+        },
+        {
+            prop: 'backgroundImage',
+            initial: ['linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)'],
+            transform: function (theme, themeProp, themeValue, style) {
+                style.backgroundImage = '';
+            }
+        },
+        {
+            selectorTexts: ['.X9KLPc', '.yoV6yd', '.Riuhhf', '.PGrLhd'],
+            transform: function (theme, themeProp, themeValue, style) {
+                if (theme.sideBarBackground) {
+                    style.background = theme.sideBarBackground;
+                }
+                else {
+                    style.background = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.PL5Wwe.H7du2 .t5F5nf', '.aOHsTc', '.W9bYdf'],
+            transform: function (theme, themeProp, themeValue, style) {
+                if (theme.unreadChannelColor) {
+                    style.color = theme.unreadChannelColor;
+                }
+                else {
+                    style.color = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.fKz7Od'],
+            transform: function (theme, themeProp, themeValue, style) {
+                if (theme.unreadChannelColor) {
+                    style.fill = theme.unreadChannelColor;
+                }
+                else {
+                    style.fill = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.t5F5nf, .wR3Nid'],
+            transform: function (theme, themeProp, themeValue, style) {
+                if (theme.channelColor) {
+                    style.color = theme.channelColor;
+                }
+                else {
+                    style.color = '';
+                }
+            }
+        }
+    ]
+};
+/* harmony default export */ var src_ruleSwaps = (ruleSwaps_ruleSwaps);
+
+// CONCATENATED MODULE: ./src/ops.ts
+
+
+
+function switchLogoColor(color) {
+    var logoContainer = getLogoContainer();
+    if (!logoContainer) {
+        return false;
+    }
+    // @ts-ignore
+    logoContainer.style = `fill: ${color};`;
+    return false;
+}
+function switchIconsColor(color) {
+    var iconSvgs = getIconSvgs();
+    for (var idx = 0; idx < iconSvgs.length; idx += 1) {
+        //@ts-ignore
+        iconSvgs[idx].style = `fill: ${color}`;
+    }
+}
+function cssRuleMatchesSwap(rule, swap) {
+    // @ts-ignore
+    var match = Object(lodash["some"])(swap.initial, function (i) {
+        //@ts-ignore
+        return rule.style && rule.style[swap.prop] === i;
+    });
+    var selectorMatch = swap.selectorTexts && Object(lodash["some"])(swap.selectorTexts, function (i) {
+        return rule.style && rule.selectorText === i;
+    });
+    return match || selectorMatch;
+}
+function applyTheme(theme) {
+    switchLogoColor(theme.unreadChannelColor ? theme.unreadChannelColor : theme.props.primaryText);
+    switchIconsColor(theme.props.icons);
+    Object(lodash["each"])(Object(lodash["keys"])(theme.props).concat(['misc']), function (themeProp) {
+        applyThemeProperty(theme, themeProp, theme.props[themeProp]);
+    });
+}
+function applyThemeProperty(theme, themeProp, themeValue) {
+    //@ts-ignore
+    var ruleSwaps = window.googleChatThemesRuleSwapList[themeProp];
+    Object(lodash["each"])(ruleSwaps, function (swap) {
+        Object(lodash["each"])(swap.matchedStyleRules, function (rule) {
+            if (swap.transform) {
+                return swap.transform(theme, themeProp, themeValue, rule.style);
+            }
+            if (rule.style && rule.style[swap.prop]) {
+                rule.style[swap.prop] = themeValue;
+            }
+        });
+    });
+}
+function getMatchedStyleRules(swap, styleSheet) {
+    var matchedStyleRules = [];
+    var cssRules;
+    try {
+        // @ts-ignore
+        cssRules = styleSheet.cssRules;
+    }
+    catch (e) {
+        // Cannot read external stylesheet
+        return matchedStyleRules;
+    }
+    //@ts-ignore
+    Object(lodash["each"])(cssRules, function (rule) {
+        if (cssRuleMatchesSwap(rule, swap)) {
+            matchedStyleRules.push(rule);
+        }
+    });
+    return matchedStyleRules;
+}
+function addRuleSwaps(styleSheet) {
+    // @ts-ignore
+    Object(lodash["mapValues"])(window.googleChatThemesRuleSwapList, function (swaps) {
+        return Object(lodash["map"])(swaps, function (swap) {
+            var newStyleRules = getMatchedStyleRules(swap.swap, styleSheet);
+            swap.matchedStyleRules = swap.matchedStyleRules.concat(newStyleRules);
+        });
+    });
+}
+function initializeRuleSwapList() {
+    const ruleSwapList = Object(lodash["mapValues"])(src_ruleSwaps, function (swaps) {
+        return Object(lodash["map"])(swaps, function (swap) {
+            return Object.assign({ swap: swap, 
+                //@ts-ignore
+                prop: swap.prop, matchedStyleRules: [], selectorText: swap.selectorText }, (swap.transform ? { transform: swap.transform } : {}));
+        });
+    });
+    // @ts-ignore
+    window.googleChatThemesRuleSwapList = ruleSwapList;
+}
+function onStyleSheetLoaded(cb) {
+    var loadedStyleSheetSignatures = {};
+    function checkLoaded() {
+        Object(lodash["each"])(Object(lodash["range"])(1, document.styleSheets.length), function (index) {
+            var cssRules;
+            try {
+                // @ts-ignore
+                cssRules = document.styleSheets[index].cssRules;
+            }
+            catch (e) {
+                // Cannot read external stylesheet
+                return;
+            }
+            var selectors = Object(lodash["map"])(cssRules, function (rule) {
+                return rule.selectorText ? rule.selectorText : '';
+            }).join('');
+            if (!loadedStyleSheetSignatures[selectors]) {
+                loadedStyleSheetSignatures[selectors] = true;
+                cb(document.styleSheets[index]);
+            }
+        });
+    }
+    checkLoaded();
+    setInterval(checkLoaded, 3000);
+}
+
+
+/***/ }),
+
+/***/ 6:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17357,7 +17808,7 @@ const defaultTheme = {
 /* harmony default export */ var themes_default = (defaultTheme);
 
 // EXTERNAL MODULE: ./src/themes/slack.ts
-var slack = __webpack_require__(3);
+var slack = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/themes/index.ts
 
@@ -17365,28 +17816,34 @@ var slack = __webpack_require__(3);
 
 /* harmony default export */ var themes = __webpack_exports__["a"] = ({
     // The keys here are used as copy in the select box in popup.ts
-    'Dark Mode': dark,
     'Default Theme': themes_default,
+    'Dark Mode': dark,
     'Slack': slack["a" /* default */],
 });
 
 
 /***/ }),
 
-/***/ 5:
+/***/ 8:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return initializeCustomThemes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return initializeCustomThemes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return writeCustomThemes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getCustomThemes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getAppliedTheme; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return setAppliedTheme; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return setAppliedTheme; });
 /* unused harmony export getThemeFromName */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return onThemeChange; });
-/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var _themes_slack__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return onThemeChange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return handleCustomThemeChanges; });
+/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _themes_slack__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _themes_themeMeta__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
+/* harmony import */ var _ops__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
+
+
 
 
 
@@ -17406,6 +17863,9 @@ function initializeCustomThemes() {
             chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemesObj });
         }
     });
+}
+function writeCustomThemes(customThemes) {
+    chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemes });
 }
 function getCustomThemes(cb) {
     chrome.storage.sync.get([CUSTOM_THEMES_KEY], function (result) {
@@ -17455,33 +17915,55 @@ function onThemeChange(cb) {
         }
     });
 }
+function handleCustomThemeChanges() {
+    chrome.storage.onChanged.addListener(function (changed) {
+        if (changed[CUSTOM_THEMES_KEY]) {
+            Object(lodash__WEBPACK_IMPORTED_MODULE_2__["each"])(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["range"])(0, changed[CUSTOM_THEMES_KEY].oldValue.length), function (index) {
+                const oldCustomTheme = changed[CUSTOM_THEMES_KEY].oldValue[index];
+                const newCustomTheme = changed[CUSTOM_THEMES_KEY].newValue[index];
+                Object(lodash__WEBPACK_IMPORTED_MODULE_2__["each"])(Object.keys(_themes_themeMeta__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]), metaKey => {
+                    if (oldCustomTheme[metaKey] &&
+                        oldCustomTheme[metaKey] !== newCustomTheme[metaKey]) {
+                        Object(_ops__WEBPACK_IMPORTED_MODULE_4__[/* applyThemeProperty */ "c"])(newCustomTheme, 'misc', newCustomTheme[metaKey]);
+                    }
+                    if (oldCustomTheme.props[metaKey] &&
+                        oldCustomTheme.props[metaKey] !== newCustomTheme.props[metaKey]) {
+                        Object(_ops__WEBPACK_IMPORTED_MODULE_4__[/* applyThemeProperty */ "c"])(newCustomTheme, metaKey, newCustomTheme.props[metaKey]);
+                        Object(_ops__WEBPACK_IMPORTED_MODULE_4__[/* applyThemeProperty */ "c"])(newCustomTheme, 'misc', null);
+                    }
+                });
+            });
+        }
+    });
+}
 
 
 /***/ }),
 
-/***/ 8:
-/***/ (function(module, exports) {
+/***/ 96:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var g;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
 
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
+chrome.runtime.onInstalled.addListener(function () {
+    Object(_storage__WEBPACK_IMPORTED_MODULE_0__[/* initializeCustomThemes */ "d"])();
+    chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
+        // With a new rule ...
+        chrome.declarativeContent.onPageChanged.addRules([
+            {
+                conditions: [
+                    new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: { urlContains: 'chat.google.com' },
+                    })
+                ],
+                // And shows the extension's page action.
+                actions: [new chrome.declarativeContent.ShowPageAction()]
+            }
+        ]);
+    });
+});
 
 
 /***/ })

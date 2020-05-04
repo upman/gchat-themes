@@ -1,5 +1,5 @@
 import { applyTheme, initializeRuleSwapList, onStyleSheetLoaded, addRuleSwaps } from './ops';
-import { getAppliedTheme, onThemeChange } from './storage';
+import { getAppliedTheme, onThemeChange, handleCustomThemeChanges } from './storage';
 
 function main() {
     initializeRuleSwapList();
@@ -9,6 +9,7 @@ function main() {
             applyTheme(theme);
         });
     });
+    handleCustomThemeChanges();
 }
 
 window.onload = main;

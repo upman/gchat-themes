@@ -81,41 +81,12 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 95);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 11:
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
-/***/ 2:
+/***/ 1:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17223,11 +17194,174 @@ module.exports = function(module) {
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8), __webpack_require__(11)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(22), __webpack_require__(17)(module)))
 
 /***/ }),
 
-/***/ 3:
+/***/ 12:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var themeMeta = {
+    primaryText: {
+        type: 'color',
+        label: 'Primary Text'
+    },
+    secondaryText: {
+        type: 'color',
+        label: 'Secondary Text'
+    },
+    mentions: {
+        type: 'color',
+        label: 'Mentions Text'
+    },
+    mentionNotificationBackground: {
+        type: 'color',
+        label: 'Your Mention background'
+    },
+    inlineMarkdownText: {
+        type: 'color',
+        label: 'Inline Markdown'
+    },
+    multilineMarkdownText: {
+        type: 'color',
+        label: 'Multi-line Markdown'
+    },
+    links: {
+        type: 'color',
+        label: 'Links'
+    },
+    icons: {
+        type: 'color',
+        label: 'Icons'
+    },
+    threadBackground: {
+        type: 'color',
+        label: 'Chat thread background'
+    },
+    inlineMarkdownBackground: {
+        type: 'color',
+        label: 'Inline Markdown Background'
+    },
+    threadContainerBackground: {
+        type: 'color',
+        label: 'Thread Container Background'
+    },
+    chatTitleBackground: {
+        type: 'color',
+        label: 'Active Chat Name Background'
+    },
+    hoverBackground: {
+        type: 'color',
+        label: 'Hover Background'
+    },
+    buttonBackground: {
+        type: 'color',
+        label: 'Button Background'
+    },
+    iconHoverBackground: {
+        type: 'color',
+        label: 'Icon hover color'
+    },
+    threadBorderColor: {
+        type: 'color',
+        label: 'Chat thread border color'
+    },
+    multiLineMarkdownBorderColor: {
+        type: 'color',
+        label: 'Multi-line Markdown Border color'
+    },
+    inlineMarkdownBorder: {
+        type: 'text',
+        label: 'Inline Markdown Border color'
+    },
+    borders: {
+        type: 'text',
+        label: 'Other Borders'
+    },
+    shadows: {
+        type: 'text',
+        label: 'Shadows'
+    },
+    searchBarActiveBackground: {
+        type: 'color',
+        label: 'Chat title search background'
+    },
+    sideBarBackground: {
+        type: 'color',
+        label: 'Sidebar background'
+    },
+    unreadChannelColor: {
+        type: 'color',
+        label: 'Unread Channel title color'
+    },
+    channelColor: {
+        type: 'color',
+        label: 'Channel title color'
+    }
+};
+/* harmony default export */ __webpack_exports__["a"] = (themeMeta);
+
+
+/***/ }),
+
+/***/ 17:
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ 22:
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 4:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17265,12 +17399,19 @@ const slackTheme = {
 
 /***/ }),
 
-/***/ 39:
+/***/ 5:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ applyTheme; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ applyThemeProperty; });
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ addRuleSwaps; });
+__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ initializeRuleSwapList; });
+__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ onStyleSheetLoaded; });
+
+// UNUSED EXPORTS: getMatchedStyleRules
 
 // CONCATENATED MODULE: ./src/dom.ts
 const logoContainerSelector = 'svg > g:nth-child(2) > g > g > g > g > g > g > g > g';
@@ -17286,7 +17427,7 @@ function getIconSvgs() {
 }
 
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
-var lodash = __webpack_require__(2);
+var lodash = __webpack_require__(1);
 
 // CONCATENATED MODULE: ./src/ruleSwaps.ts
 const ruleSwaps_ruleSwaps = {
@@ -17600,30 +17741,10 @@ function onStyleSheetLoaded(cb) {
     setInterval(checkLoaded, 3000);
 }
 
-// EXTERNAL MODULE: ./src/storage.ts
-var storage = __webpack_require__(5);
-
-// CONCATENATED MODULE: ./src/content.ts
-
-
-function main() {
-    initializeRuleSwapList();
-    onStyleSheetLoaded(function (styleSheet) {
-        addRuleSwaps(styleSheet);
-        Object(storage["a" /* getAppliedTheme */])(function (theme) {
-            applyTheme(theme);
-        });
-    });
-}
-window.onload = main;
-Object(storage["d" /* onThemeChange */])(function (theme) {
-    applyTheme(theme);
-});
-
 
 /***/ }),
 
-/***/ 4:
+/***/ 6:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17687,7 +17808,7 @@ const defaultTheme = {
 /* harmony default export */ var themes_default = (defaultTheme);
 
 // EXTERNAL MODULE: ./src/themes/slack.ts
-var slack = __webpack_require__(3);
+var slack = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/themes/index.ts
 
@@ -17695,28 +17816,34 @@ var slack = __webpack_require__(3);
 
 /* harmony default export */ var themes = __webpack_exports__["a"] = ({
     // The keys here are used as copy in the select box in popup.ts
-    'Dark Mode': dark,
     'Default Theme': themes_default,
+    'Dark Mode': dark,
     'Slack': slack["a" /* default */],
 });
 
 
 /***/ }),
 
-/***/ 5:
+/***/ 8:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return initializeCustomThemes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return initializeCustomThemes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return writeCustomThemes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getCustomThemes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getAppliedTheme; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return setAppliedTheme; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return setAppliedTheme; });
 /* unused harmony export getThemeFromName */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return onThemeChange; });
-/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var _themes_slack__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return onThemeChange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return handleCustomThemeChanges; });
+/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _themes_slack__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _themes_themeMeta__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
+/* harmony import */ var _ops__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
+
+
 
 
 
@@ -17736,6 +17863,9 @@ function initializeCustomThemes() {
             chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemesObj });
         }
     });
+}
+function writeCustomThemes(customThemes) {
+    chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemes });
 }
 function getCustomThemes(cb) {
     chrome.storage.sync.get([CUSTOM_THEMES_KEY], function (result) {
@@ -17785,33 +17915,54 @@ function onThemeChange(cb) {
         }
     });
 }
+function handleCustomThemeChanges() {
+    chrome.storage.onChanged.addListener(function (changed) {
+        if (changed[CUSTOM_THEMES_KEY]) {
+            Object(lodash__WEBPACK_IMPORTED_MODULE_2__["each"])(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["range"])(0, changed[CUSTOM_THEMES_KEY].oldValue.length), function (index) {
+                const oldCustomTheme = changed[CUSTOM_THEMES_KEY].oldValue[index];
+                const newCustomTheme = changed[CUSTOM_THEMES_KEY].newValue[index];
+                Object(lodash__WEBPACK_IMPORTED_MODULE_2__["each"])(Object.keys(_themes_themeMeta__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]), metaKey => {
+                    if (oldCustomTheme[metaKey] &&
+                        oldCustomTheme[metaKey] !== newCustomTheme[metaKey]) {
+                        Object(_ops__WEBPACK_IMPORTED_MODULE_4__[/* applyThemeProperty */ "c"])(newCustomTheme, 'misc', newCustomTheme[metaKey]);
+                    }
+                    if (oldCustomTheme.props[metaKey] &&
+                        oldCustomTheme.props[metaKey] !== newCustomTheme.props[metaKey]) {
+                        Object(_ops__WEBPACK_IMPORTED_MODULE_4__[/* applyThemeProperty */ "c"])(newCustomTheme, metaKey, newCustomTheme.props[metaKey]);
+                        Object(_ops__WEBPACK_IMPORTED_MODULE_4__[/* applyThemeProperty */ "c"])(newCustomTheme, 'misc', null);
+                    }
+                });
+            });
+        }
+    });
+}
 
 
 /***/ }),
 
-/***/ 8:
-/***/ (function(module, exports) {
+/***/ 95:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var g;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ops__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
 
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
+function main() {
+    Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* initializeRuleSwapList */ "d"])();
+    Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* onStyleSheetLoaded */ "e"])(function (styleSheet) {
+        Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* addRuleSwaps */ "a"])(styleSheet);
+        Object(_storage__WEBPACK_IMPORTED_MODULE_1__[/* getAppliedTheme */ "a"])(function (theme) {
+            Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* applyTheme */ "b"])(theme);
+        });
+    });
+    Object(_storage__WEBPACK_IMPORTED_MODULE_1__[/* handleCustomThemeChanges */ "c"])();
 }
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
+window.onload = main;
+Object(_storage__WEBPACK_IMPORTED_MODULE_1__[/* onThemeChange */ "e"])(function (theme) {
+    Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* applyTheme */ "b"])(theme);
+});
 
 
 /***/ })

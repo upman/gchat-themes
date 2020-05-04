@@ -4,6 +4,8 @@ declare namespace StyleCssModule {
     colorSwatch: string;
     colorText: string;
     cover: string;
+    credit: string;
+    customThemeContainer: string;
     popupContainer: string;
     propInput: string;
     propertyBlock: string;

@@ -52,7 +52,7 @@ var themeMeta: { [m in ThemeMeta]: { type: 'color' | 'text', label: string } } =
     },
     chatTitleBackground: {
         type: 'color',
-        label: 'Chat title Background'
+        label: 'Active Chat Name Background'
     },
     hoverBackground: {
         type: 'color',
