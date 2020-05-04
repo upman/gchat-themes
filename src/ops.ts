@@ -117,7 +117,7 @@ function getStyleSheetSignature(styleSheet) {
     var cssRules;
     try {
         // @ts-ignore
-        cssRules = document.styleSheets[index].cssRules;
+        cssRules = styleSheet.cssRules;
     } catch(e) {
         // Cannot read external stylesheet
         return;
@@ -141,5 +141,5 @@ export function onStyleSheetLoaded(cb) {
         });
     }
     checkLoaded();
-    setInterval(checkLoaded, 3000);
+    setInterval(checkLoaded, 1000);
 }

@@ -17444,7 +17444,7 @@ const ruleSwaps_ruleSwaps = {
     icons: [
         {
             prop: 'color',
-            initial: ['rgba(0, 0, 0, 0.54)'],
+            initial: ['rgba(0, 0, 0, 0.54)', 'rgb(189, 193, 198)'],
             transform: function (theme, themeProp, themeValue, style) {
                 style.color = themeValue;
                 style.fill = themeValue;
@@ -17452,7 +17452,7 @@ const ruleSwaps_ruleSwaps = {
         },
         {
             prop: 'fill',
-            initial: ['rgb(32, 33, 36)']
+            initial: ['rgb(32, 33, 36)', 'rgb(189, 193, 198)']
         }
     ],
     threadBackground: [{
@@ -17550,7 +17550,7 @@ const ruleSwaps_ruleSwaps = {
     font: [
         {
             prop: 'font-family',
-            initial: ['Roboto, sans-serif']
+            initial: ['Roboto, sans-serif', 'Google Sans", Arial, sans-serif']
         }
     ],
     misc: [
@@ -17566,6 +17566,12 @@ const ruleSwaps_ruleSwaps = {
             initial: ['linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)'],
             transform: function (theme, themeProp, themeValue, style) {
                 style.backgroundImage = '';
+            }
+        },
+        {
+            selectorTexts: ['.IB1Cob', '.xjKiLb'],
+            transform: function (theme, themeProp, themeValue, style) {
+                style.fill = theme.props.icons;
             }
         },
         {
@@ -17714,7 +17720,7 @@ function getStyleSheetSignature(styleSheet) {
     var cssRules;
     try {
         // @ts-ignore
-        cssRules = document.styleSheets[index].cssRules;
+        cssRules = styleSheet.cssRules;
     }
     catch (e) {
         // Cannot read external stylesheet
@@ -17736,7 +17742,7 @@ function onStyleSheetLoaded(cb) {
         });
     }
     checkLoaded();
-    setInterval(checkLoaded, 3000);
+    setInterval(checkLoaded, 1000);
 }
 
 

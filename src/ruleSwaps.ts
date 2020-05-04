@@ -28,7 +28,7 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
     icons: [
         {
             prop: 'color',
-            initial: ['rgba(0, 0, 0, 0.54)'],
+            initial: ['rgba(0, 0, 0, 0.54)', 'rgb(189, 193, 198)'],
             transform: function(theme, themeProp, themeValue, style) {
                 style.color = themeValue;
                 style.fill = themeValue;
@@ -36,7 +36,7 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
         },
         {
             prop: 'fill',
-            initial: ['rgb(32, 33, 36)']
+            initial: ['rgb(32, 33, 36)', 'rgb(189, 193, 198)']
         }
     ],
     threadBackground: [{
@@ -134,7 +134,7 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
     font: [
         {
             prop: 'font-family',
-            initial: ['Roboto, sans-serif']
+            initial: ['Roboto, sans-serif', 'Google Sans", Arial, sans-serif']
         }
     ],
     misc: [
@@ -150,6 +150,12 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
             initial: ['linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255) 50%)'],
             transform: function(theme, themeProp, themeValue, style) {
                 style.backgroundImage = '';
+            }
+        },
+        {
+            selectorTexts: ['.IB1Cob', '.xjKiLb'],
+            transform: function(theme, themeProp, themeValue, style) {
+                style.fill = theme.props.icons;
             }
         },
         {
