@@ -1,7 +1,7 @@
 import type { Theme } from '../types';
 
 const darkTheme: Theme = {
-    name: 'Dark',
+    name: 'Dark Mode',
     props: {
         primaryText: 'rgb(231, 232, 235)',
         secondaryText: 'rgb(136, 153, 166)',
@@ -23,7 +23,8 @@ const darkTheme: Theme = {
         inlineMarkdownBorder: '1px solid rgb(62, 97, 130)',
         borders: '1px solid rgb(135, 143, 156)',
         shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
-        searchBarActiveBackground: 'rgb(25, 39, 52)'
+        searchBarActiveBackground: 'rgb(25, 39, 52)',
+        font: 'Roboto, sans-serif'
     }
 };
 

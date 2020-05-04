@@ -22,6 +22,7 @@ export type Theme = {
         borders: string,
         shadows: string,
         searchBarActiveBackground: string
+        font: string
     },
     sideBarBackground?: string,
     unreadChannelColor?: string,

@@ -7,6 +7,7 @@ import { getCustomThemes, getAppliedTheme } from '../storage';
 document.addEventListener('DOMContentLoaded', function() {
     getCustomThemes(function(customThemes) {
         getAppliedTheme(function(appliedTheme) {
+            console.log(customThemes, appliedTheme);
             var container = React.createElement(PopupContainer, {
                 appliedTheme,
                 customThemes

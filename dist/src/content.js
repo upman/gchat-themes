@@ -17203,6 +17203,10 @@
 
 "use strict";
 var themeMeta = {
+    font: {
+        type: 'text',
+        label: 'Font'
+    },
     primaryText: {
         type: 'color',
         label: 'Primary Text'
@@ -17361,6 +17365,42 @@ module.exports = g;
 
 /***/ }),
 
+/***/ 269:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const darkTheme = {
+    name: 'Dark Mode',
+    props: {
+        primaryText: 'rgb(231, 232, 235)',
+        secondaryText: 'rgb(136, 153, 166)',
+        mentions: 'rgb(65, 173, 240)',
+        inlineMarkdownText: 'rgb(245, 245, 245)',
+        multilineMarkdownText: 'rgb(239, 239, 239)',
+        links: 'rgb(65, 173, 240)',
+        icons: 'rgba(255, 255, 255, 0.54)',
+        threadBackground: 'rgb(25, 39, 52)',
+        threadContainerBackground: 'rgb(21, 32, 43)',
+        chatTitleBackground: 'rgb(0, 0, 0)',
+        hoverBackground: 'rgb(32, 48, 61)',
+        mentionNotificationBackground: 'rgb(65, 173, 240)',
+        inlineMarkdownBackground: 'rgb(55, 86, 115)',
+        buttonBackground: 'rgb(29, 161, 242)',
+        iconHoverBackground: 'rgba(226, 230, 234, 0.14)',
+        threadBorderColor: 'rgb(83, 102, 115)',
+        multiLineMarkdownBorderColor: 'rgb(71, 110, 146)',
+        inlineMarkdownBorder: '1px solid rgb(62, 97, 130)',
+        borders: '1px solid rgb(135, 143, 156)',
+        shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
+        searchBarActiveBackground: 'rgb(25, 39, 52)',
+        font: 'Roboto, sans-serif'
+    }
+};
+/* harmony default export */ __webpack_exports__["a"] = (darkTheme);
+
+
+/***/ }),
+
 /***/ 4:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17388,7 +17428,8 @@ const slackTheme = {
         inlineMarkdownBorder: '1px solid rgb(201, 201, 201)',
         borders: '1px solid rgb(218, 220, 224)',
         shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
-        searchBarActiveBackground: 'rgb(255, 255, 255)'
+        searchBarActiveBackground: 'rgb(255, 255, 255)',
+        font: 'Roboto, sans-serif'
     },
     sideBarBackground: '#3E103F',
     unreadChannelColor: '#ffffff',
@@ -17561,6 +17602,12 @@ const ruleSwaps_ruleSwaps = {
             initial: ['rgba(255, 255, 255, 0.7)']
         }
     ],
+    font: [
+        {
+            prop: 'font-family',
+            initial: ['Roboto, sans-serif']
+        }
+    ],
     misc: [
         {
             prop: 'background',
@@ -17715,24 +17762,30 @@ function initializeRuleSwapList() {
     // @ts-ignore
     window.googleChatThemesRuleSwapList = ruleSwapList;
 }
+function getStyleSheetSignature(styleSheet) {
+    if (styleSheet.href) {
+        return styleSheet.href;
+    }
+    var cssRules;
+    try {
+        // @ts-ignore
+        cssRules = document.styleSheets[index].cssRules;
+    }
+    catch (e) {
+        // Cannot read external stylesheet
+        return;
+    }
+    return Object(lodash["map"])(cssRules, function (rule) {
+        return rule.selectorText ? rule.selectorText : '';
+    }).join('');
+}
 function onStyleSheetLoaded(cb) {
     var loadedStyleSheetSignatures = {};
     function checkLoaded() {
         Object(lodash["each"])(Object(lodash["range"])(1, document.styleSheets.length), function (index) {
-            var cssRules;
-            try {
-                // @ts-ignore
-                cssRules = document.styleSheets[index].cssRules;
-            }
-            catch (e) {
-                // Cannot read external stylesheet
-                return;
-            }
-            var selectors = Object(lodash["map"])(cssRules, function (rule) {
-                return rule.selectorText ? rule.selectorText : '';
-            }).join('');
-            if (!loadedStyleSheetSignatures[selectors]) {
-                loadedStyleSheetSignatures[selectors] = true;
+            const signature = getStyleSheetSignature(document.styleSheets[index]);
+            if (!loadedStyleSheetSignatures[signature]) {
+                loadedStyleSheetSignatures[signature] = true;
                 cb(document.styleSheets[index]);
             }
         });
@@ -17749,34 +17802,8 @@ function onStyleSheetLoaded(cb) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./src/themes/dark.ts
-const darkTheme = {
-    name: 'Dark',
-    props: {
-        primaryText: 'rgb(231, 232, 235)',
-        secondaryText: 'rgb(136, 153, 166)',
-        mentions: 'rgb(65, 173, 240)',
-        inlineMarkdownText: 'rgb(245, 245, 245)',
-        multilineMarkdownText: 'rgb(239, 239, 239)',
-        links: 'rgb(65, 173, 240)',
-        icons: 'rgba(255, 255, 255, 0.54)',
-        threadBackground: 'rgb(25, 39, 52)',
-        threadContainerBackground: 'rgb(21, 32, 43)',
-        chatTitleBackground: 'rgb(0, 0, 0)',
-        hoverBackground: 'rgb(32, 48, 61)',
-        mentionNotificationBackground: 'rgb(65, 173, 240)',
-        inlineMarkdownBackground: 'rgb(55, 86, 115)',
-        buttonBackground: 'rgb(29, 161, 242)',
-        iconHoverBackground: 'rgba(226, 230, 234, 0.14)',
-        threadBorderColor: 'rgb(83, 102, 115)',
-        multiLineMarkdownBorderColor: 'rgb(71, 110, 146)',
-        inlineMarkdownBorder: '1px solid rgb(62, 97, 130)',
-        borders: '1px solid rgb(135, 143, 156)',
-        shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
-        searchBarActiveBackground: 'rgb(25, 39, 52)'
-    }
-};
-/* harmony default export */ var dark = (darkTheme);
+// EXTERNAL MODULE: ./src/themes/dark.ts
+var dark = __webpack_require__(269);
 
 // CONCATENATED MODULE: ./src/themes/default.ts
 const defaultTheme = {
@@ -17802,7 +17829,8 @@ const defaultTheme = {
         inlineMarkdownBorder: '1px solid rgb(201, 201, 201)',
         borders: '1px solid rgb(218, 220, 224)',
         shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
-        searchBarActiveBackground: 'rgb(255, 255, 255)'
+        searchBarActiveBackground: 'rgb(255, 255, 255)',
+        font: 'Roboto, sans-serif'
     }
 };
 /* harmony default export */ var themes_default = (defaultTheme);
@@ -17816,9 +17844,9 @@ var slack = __webpack_require__(4);
 
 /* harmony default export */ var themes = __webpack_exports__["a"] = ({
     // The keys here are used as copy in the select box in popup.ts
-    'Default Theme': themes_default,
-    'Dark Mode': dark,
-    'Slack': slack["a" /* default */],
+    [themes_default.name]: themes_default,
+    [dark["a" /* default */].name]: dark["a" /* default */],
+    [slack["a" /* default */].name]: slack["a" /* default */],
 });
 
 
@@ -17828,20 +17856,23 @@ var slack = __webpack_require__(4);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return initializeCustomThemes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return writeCustomThemes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return initializeCustomThemes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return initializeAppliedTheme; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return writeCustomThemes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getCustomThemes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getAppliedTheme; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return setAppliedTheme; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return setAppliedTheme; });
 /* unused harmony export getThemeFromName */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return onThemeChange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return onThemeChange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return handleCustomThemeChanges; });
 /* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var _themes_slack__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _themes_themeMeta__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
-/* harmony import */ var _ops__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
+/* harmony import */ var _themes_dark__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(269);
+/* harmony import */ var _themes_slack__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _themes_themeMeta__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
+/* harmony import */ var _ops__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5);
+
 
 
 
@@ -17856,24 +17887,32 @@ function initializeCustomThemes() {
         }
         else {
             var customThemesObj = [
-                Object.assign(Object.assign({}, Object(lodash__WEBPACK_IMPORTED_MODULE_2__["cloneDeep"])(_themes_slack__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])), { name: 'Custom Theme 1', isCustom: true }),
-                Object.assign(Object.assign({}, Object(lodash__WEBPACK_IMPORTED_MODULE_2__["cloneDeep"])(_themes_slack__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])), { name: 'Custom Theme 2', isCustom: true }),
-                Object.assign(Object.assign({}, Object(lodash__WEBPACK_IMPORTED_MODULE_2__["cloneDeep"])(_themes_slack__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])), { name: 'Custom Theme 3', isCustom: true })
+                Object.assign(Object.assign({}, Object(lodash__WEBPACK_IMPORTED_MODULE_3__["cloneDeep"])(_themes_slack__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])), { name: 'Custom Theme 1', isCustom: true }),
+                Object.assign(Object.assign({}, Object(lodash__WEBPACK_IMPORTED_MODULE_3__["cloneDeep"])(_themes_slack__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])), { name: 'Custom Theme 2', isCustom: true }),
+                Object.assign(Object.assign({}, Object(lodash__WEBPACK_IMPORTED_MODULE_3__["cloneDeep"])(_themes_slack__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])), { name: 'Custom Theme 3', isCustom: true })
             ];
-            chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemesObj });
+            chrome.storage.local.set({ [CUSTOM_THEMES_KEY]: customThemesObj });
         }
     });
 }
+function initializeAppliedTheme() {
+    getAppliedTheme(appliedTheme => {
+        if (appliedTheme) {
+            return;
+        }
+        chrome.storage.local.set({ [APPLIED_THEME_KEY]: _themes_dark__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].name });
+    });
+}
 function writeCustomThemes(customThemes) {
-    chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemes });
+    chrome.storage.local.set({ [CUSTOM_THEMES_KEY]: customThemes });
 }
 function getCustomThemes(cb) {
-    chrome.storage.sync.get([CUSTOM_THEMES_KEY], function (result) {
+    chrome.storage.local.get([CUSTOM_THEMES_KEY], function (result) {
         cb(result[CUSTOM_THEMES_KEY]);
     });
 }
 function getAppliedTheme(cb) {
-    chrome.storage.sync.get([APPLIED_THEME_KEY], function (result) {
+    chrome.storage.local.get([APPLIED_THEME_KEY], function (result) {
         if (result[APPLIED_THEME_KEY] && _themes__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"][result[APPLIED_THEME_KEY]]) {
             cb(_themes__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"][result[APPLIED_THEME_KEY]]);
         }
@@ -17886,10 +17925,8 @@ function getAppliedTheme(cb) {
     });
 }
 function setAppliedTheme(themeName, cb) {
-    chrome.storage.sync.set({ [APPLIED_THEME_KEY]: themeName }, function () {
-        if (cb) {
-            cb();
-        }
+    chrome.storage.local.set({ [APPLIED_THEME_KEY]: themeName }, function () {
+        cb && cb();
     });
 }
 function getThemeFromName(themeName, cb) {
@@ -17918,18 +17955,18 @@ function onThemeChange(cb) {
 function handleCustomThemeChanges() {
     chrome.storage.onChanged.addListener(function (changed) {
         if (changed[CUSTOM_THEMES_KEY]) {
-            Object(lodash__WEBPACK_IMPORTED_MODULE_2__["each"])(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["range"])(0, changed[CUSTOM_THEMES_KEY].oldValue.length), function (index) {
+            Object(lodash__WEBPACK_IMPORTED_MODULE_3__["each"])(Object(lodash__WEBPACK_IMPORTED_MODULE_3__["range"])(0, changed[CUSTOM_THEMES_KEY].oldValue.length), function (index) {
                 const oldCustomTheme = changed[CUSTOM_THEMES_KEY].oldValue[index];
                 const newCustomTheme = changed[CUSTOM_THEMES_KEY].newValue[index];
-                Object(lodash__WEBPACK_IMPORTED_MODULE_2__["each"])(Object.keys(_themes_themeMeta__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]), metaKey => {
+                Object(lodash__WEBPACK_IMPORTED_MODULE_3__["each"])(Object.keys(_themes_themeMeta__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]), metaKey => {
                     if (oldCustomTheme[metaKey] &&
                         oldCustomTheme[metaKey] !== newCustomTheme[metaKey]) {
-                        Object(_ops__WEBPACK_IMPORTED_MODULE_4__[/* applyThemeProperty */ "c"])(newCustomTheme, 'misc', newCustomTheme[metaKey]);
+                        Object(_ops__WEBPACK_IMPORTED_MODULE_5__[/* applyThemeProperty */ "c"])(newCustomTheme, 'misc', newCustomTheme[metaKey]);
                     }
                     if (oldCustomTheme.props[metaKey] &&
                         oldCustomTheme.props[metaKey] !== newCustomTheme.props[metaKey]) {
-                        Object(_ops__WEBPACK_IMPORTED_MODULE_4__[/* applyThemeProperty */ "c"])(newCustomTheme, metaKey, newCustomTheme.props[metaKey]);
-                        Object(_ops__WEBPACK_IMPORTED_MODULE_4__[/* applyThemeProperty */ "c"])(newCustomTheme, 'misc', null);
+                        Object(_ops__WEBPACK_IMPORTED_MODULE_5__[/* applyThemeProperty */ "c"])(newCustomTheme, metaKey, newCustomTheme.props[metaKey]);
+                        Object(_ops__WEBPACK_IMPORTED_MODULE_5__[/* applyThemeProperty */ "c"])(newCustomTheme, 'misc', null);
                     }
                 });
             });
@@ -17960,7 +17997,7 @@ function main() {
     Object(_storage__WEBPACK_IMPORTED_MODULE_1__[/* handleCustomThemeChanges */ "c"])();
 }
 window.onload = main;
-Object(_storage__WEBPACK_IMPORTED_MODULE_1__[/* onThemeChange */ "e"])(function (theme) {
+Object(_storage__WEBPACK_IMPORTED_MODULE_1__[/* onThemeChange */ "f"])(function (theme) {
     Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* applyTheme */ "b"])(theme);
 });
 

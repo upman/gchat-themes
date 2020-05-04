@@ -1,9 +1,9 @@
 {
   "name": "y",
   "version": "0.0.1",
-  "description": "Custom google chat theme",
+  "description": "Custom google chat themes",
   "main": "src/content.ts",
-  "repository": "https://github.com/upman/google-chat-dark-mode",
+  "repository": "https://github.com/upman/google-chat-themes",
   "author": "Ravi Kumar Lazar",
   "license": "MIT",
   "scripts": {

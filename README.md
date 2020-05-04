@@ -10,3 +10,6 @@ Or clone `git@github.com/upman/gchat-copy.git` if you are comfortable with Git
 3. In Chrome, go to 'Settings > Extensions'
 4. Enable 'Developer mode'
 5. Click on 'Load unpacked extension...' and select the folder that you unzipped
+
+## Development
+Run `yarn dev`, output ends up in `dist` directory install this using the instructions above.

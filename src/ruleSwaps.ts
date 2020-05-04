@@ -131,6 +131,12 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
             initial: ['rgba(255, 255, 255, 0.7)']
         }
     ],
+    font: [
+        {
+            prop: 'font-family',
+            initial: ['Roboto, sans-serif']
+        }
+    ],
     misc: [
         {
             prop: 'background',

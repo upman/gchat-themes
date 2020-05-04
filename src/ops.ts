@@ -109,25 +109,33 @@ export function initializeRuleSwapList() {
     window.googleChatThemesRuleSwapList = ruleSwapList;
 }
 
+function getStyleSheetSignature(styleSheet) {
+    if (styleSheet.href) {
+        return styleSheet.href;
+    }
+
+    var cssRules;
+    try {
+        // @ts-ignore
+        cssRules = document.styleSheets[index].cssRules;
+    } catch(e) {
+        // Cannot read external stylesheet
+        return;
+    }
+
+    return map(cssRules, function(rule) {
+        return rule.selectorText ? rule.selectorText : '';
+    }).join('');
+}
+
 export function onStyleSheetLoaded(cb) {
     var loadedStyleSheetSignatures = {};
     function checkLoaded() {
         each(range(1, document.styleSheets.length), function(index) {
-            var cssRules;
-            try {
-                // @ts-ignore
-                cssRules = document.styleSheets[index].cssRules;
-            } catch(e) {
-                // Cannot read external stylesheet
-                return;
-            }
+            const signature = getStyleSheetSignature(document.styleSheets[index]);
 
-            var selectors = map(cssRules, function(rule) {
-                return rule.selectorText ? rule.selectorText : '';
-            }).join('');
-
-            if (!loadedStyleSheetSignatures[selectors]) {
-                loadedStyleSheetSignatures[selectors] = true;
+            if (!loadedStyleSheetSignatures[signature]) {
+                loadedStyleSheetSignatures[signature] = true;
                 cb(document.styleSheets[index]);
             }
         });

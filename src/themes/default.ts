@@ -23,7 +23,8 @@ const defaultTheme: Theme = {
         inlineMarkdownBorder: '1px solid rgb(201, 201, 201)',
         borders: '1px solid rgb(218, 220, 224)',
         shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
-        searchBarActiveBackground: 'rgb(255, 255, 255)'
+        searchBarActiveBackground: 'rgb(255, 255, 255)',
+        font: 'Roboto, sans-serif'
     }
 };
 

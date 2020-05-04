@@ -6,6 +6,10 @@ type ThemeMeta = keyof Theme["props"]
     | 'channelColor';
 
 var themeMeta: { [m in ThemeMeta]: { type: 'color' | 'text', label: string } } = {
+    font: {
+        type: 'text',
+        label: 'Font'
+    },
     primaryText: {
         type: 'color',
         label: 'Primary Text'

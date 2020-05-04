@@ -1,10 +1,11 @@
 import themes from './themes';
+import DarkMode from './themes/dark';
 
 import Slack from './themes/slack';
 import { cloneDeep, each, range } from 'lodash';
 import { Theme } from './types';
 import ThemeMeta from './themes/themeMeta';
-import { applyThemeProperty, applyTheme } from './ops';
+import { applyThemeProperty } from './ops';
 
 const APPLIED_THEME_KEY = 'appliedTheme';
 const CUSTOM_THEMES_KEY = 'customThemes';
@@ -31,23 +32,33 @@ export function initializeCustomThemes() {
                     isCustom: true
                 }
             ];
-            chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemesObj });
+            chrome.storage.local.set({ [CUSTOM_THEMES_KEY]: customThemesObj });
         }
     });
 }
 
+export function initializeAppliedTheme() {
+    getAppliedTheme(appliedTheme => {
+        if (appliedTheme) {
+            return;
+        }
+
+        chrome.storage.local.set({ [APPLIED_THEME_KEY]: DarkMode.name });
+    });
+}
+
 export function writeCustomThemes(customThemes) {
-    chrome.storage.sync.set({ [CUSTOM_THEMES_KEY]: customThemes});
+    chrome.storage.local.set({ [CUSTOM_THEMES_KEY]: customThemes});
 }
 
 export function getCustomThemes(cb) {
-    chrome.storage.sync.get([CUSTOM_THEMES_KEY], function(result) {
+    chrome.storage.local.get([CUSTOM_THEMES_KEY], function(result) {
         cb(result[CUSTOM_THEMES_KEY]);
     });
 }
 
 export function getAppliedTheme(cb) {
-    chrome.storage.sync.get([APPLIED_THEME_KEY], function(result) {
+    chrome.storage.local.get([APPLIED_THEME_KEY], function(result) {
         if (result[APPLIED_THEME_KEY] && themes[result[APPLIED_THEME_KEY]]) {
             cb(themes[result[APPLIED_THEME_KEY]]);
         } else {
@@ -60,10 +71,8 @@ export function getAppliedTheme(cb) {
 }
 
 export function setAppliedTheme(themeName, cb?: () => void) {
-    chrome.storage.sync.set({ [APPLIED_THEME_KEY]: themeName}, function() {
-        if (cb) {
-            cb();
-        }
+    chrome.storage.local.set({ [APPLIED_THEME_KEY]: themeName}, function() {
+        cb && cb();
     });
 }
 
