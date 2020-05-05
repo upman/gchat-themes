@@ -3,9 +3,9 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        "chrome-plugin/src/content": "./src/content.ts",
-        "chrome-plugin/src/background": "./src/background.ts",
-        "chrome-plugin/src/popup": "./src/popup/popup.ts",
+        "chrome-extension/src/content": "./src/content.ts",
+        "chrome-extension/src/background": "./src/background.ts",
+        "chrome-extension/src/popup": "./src/popup/popup.ts",
         "standalone/dark-mode": "./src/standalone/darkMode.ts",
         "standalone/slack-mode": "./src/standalone/slackMode.ts"
     },
@@ -43,16 +43,16 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin([
-            { from: 'images', to: 'dist/chrome-plugin/images', transformPath: function(targetPath) {
+            { from: 'images', to: 'dist/chrome-extension/images', transformPath: function(targetPath) {
                 return path.join('..', targetPath);
             }},
-            { from: 'manifest.json', to: 'dist/chrome-plugin/manifest.json', transformPath: function(targetPath) {
+            { from: 'manifest.json', to: 'dist/chrome-extension/manifest.json', transformPath: function(targetPath) {
                 return path.join('..', targetPath);
             } },
-            { from: 'src/popup/popup.html', to: 'dist/chrome-plugin/src/popup/popup.html', transformPath: function(targetPath) {
+            { from: 'src/popup/popup.html', to: 'dist/chrome-extension/src/popup/popup.html', transformPath: function(targetPath) {
                 return path.join('..', targetPath);
             } },
-            { from: 'src/popup/style.css', to: 'dist/chrome-plugin/src/popup/style.css', transformPath: function(targetPath) {
+            { from: 'src/popup/style.css', to: 'dist/chrome-extension/src/popup/style.css', transformPath: function(targetPath) {
                 return path.join('..', targetPath);
             } },
         ]),
