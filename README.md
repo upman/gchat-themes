@@ -19,3 +19,7 @@ Download the repository with the same instructions as above and then install `di
 ## Development
 Run `yarn dev`, output ends up in `dist` directory. Install this using the instructions above.
 There is a reload button on the extensions page that can be used when you make changes.
+
+## Contributing a new theme
+Create a file in the `themes` directory with all the values specified and create a pull request.
+Use `themes/slack.ts` or `themes/dark.ts` as examples.
