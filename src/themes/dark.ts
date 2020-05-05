@@ -25,7 +25,8 @@ const darkTheme: Theme = {
         shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
         searchBarActiveBackground: 'rgb(25, 39, 52)',
         font: 'Roboto, sans-serif'
-    }
+    },
+    topBarBackground: 'rgb(25, 39, 52)'
 };
 
 export default darkTheme;

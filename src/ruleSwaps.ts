@@ -153,8 +153,15 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
             }
         },
         {
+            selectorTexts: ['.QTQg5e'],
+            transform: function(theme, themeProp, themeValue, style) {
+                style.background = theme.topBarBackground;
+            }
+        },
+        {
             selectorTexts: ['.IB1Cob', '.xjKiLb'],
             transform: function(theme, themeProp, themeValue, style) {
+                // Icons in the chat input bar when active
                 style.fill = theme.props.icons;
             }
         },

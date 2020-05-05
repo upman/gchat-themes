@@ -3,7 +3,8 @@ import { Theme } from '../types';
 type ThemeMeta = keyof Theme["props"]
     | 'sideBarBackground'
     | 'unreadChannelColor'
-    | 'channelColor';
+    | 'channelColor'
+    | 'topBarBackground';
 
 var themeMeta: { [m in ThemeMeta]: { type: 'color' | 'text', label: string } } = {
     font: {
@@ -41,6 +42,10 @@ var themeMeta: { [m in ThemeMeta]: { type: 'color' | 'text', label: string } } =
     icons: {
         type: 'color',
         label: 'Icons'
+    },
+    topBarBackground: {
+        type: 'color',
+        label: 'Top Bar Background'
     },
     threadBackground: {
         type: 'color',

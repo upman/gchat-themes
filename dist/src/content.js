@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 95);
+/******/ 	return __webpack_require__(__webpack_require__.s = 96);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -17194,11 +17194,11 @@
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(22), __webpack_require__(17)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(23), __webpack_require__(18)(module)))
 
 /***/ }),
 
-/***/ 12:
+/***/ 13:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17238,6 +17238,10 @@ var themeMeta = {
     icons: {
         type: 'color',
         label: 'Icons'
+    },
+    topBarBackground: {
+        type: 'color',
+        label: 'Top Bar Background'
     },
     threadBackground: {
         type: 'color',
@@ -17309,7 +17313,7 @@ var themeMeta = {
 
 /***/ }),
 
-/***/ 17:
+/***/ 18:
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -17338,7 +17342,7 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /***/ (function(module, exports) {
 
 var g;
@@ -17361,42 +17365,6 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
-
-
-/***/ }),
-
-/***/ 269:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-const darkTheme = {
-    name: 'Dark Mode',
-    props: {
-        primaryText: 'rgb(231, 232, 235)',
-        secondaryText: 'rgb(136, 153, 166)',
-        mentions: 'rgb(65, 173, 240)',
-        inlineMarkdownText: 'rgb(245, 245, 245)',
-        multilineMarkdownText: 'rgb(239, 239, 239)',
-        links: 'rgb(65, 173, 240)',
-        icons: 'rgba(255, 255, 255, 0.54)',
-        threadBackground: 'rgb(25, 39, 52)',
-        threadContainerBackground: 'rgb(21, 32, 43)',
-        chatTitleBackground: 'rgb(0, 0, 0)',
-        hoverBackground: 'rgb(32, 48, 61)',
-        mentionNotificationBackground: 'rgb(65, 173, 240)',
-        inlineMarkdownBackground: 'rgb(55, 86, 115)',
-        buttonBackground: 'rgb(29, 161, 242)',
-        iconHoverBackground: 'rgba(226, 230, 234, 0.14)',
-        threadBorderColor: 'rgb(83, 102, 115)',
-        multiLineMarkdownBorderColor: 'rgb(71, 110, 146)',
-        inlineMarkdownBorder: '1px solid rgb(62, 97, 130)',
-        borders: '1px solid rgb(135, 143, 156)',
-        shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
-        searchBarActiveBackground: 'rgb(25, 39, 52)',
-        font: 'Roboto, sans-serif'
-    }
-};
-/* harmony default export */ __webpack_exports__["a"] = (darkTheme);
 
 
 /***/ }),
@@ -17431,7 +17399,8 @@ const slackTheme = {
         searchBarActiveBackground: 'rgb(255, 255, 255)',
         font: 'Roboto, sans-serif'
     },
-    sideBarBackground: '#3E103F',
+    topBarBackground: 'white',
+    sideBarBackground: '#4A154B',
     unreadChannelColor: '#ffffff',
     channelColor: '#cac4c9'
 };
@@ -17624,8 +17593,15 @@ const ruleSwaps_ruleSwaps = {
             }
         },
         {
+            selectorTexts: ['.QTQg5e'],
+            transform: function (theme, themeProp, themeValue, style) {
+                style.background = theme.topBarBackground;
+            }
+        },
+        {
             selectorTexts: ['.IB1Cob', '.xjKiLb'],
             transform: function (theme, themeProp, themeValue, style) {
+                // Icons in the chat input bar when active
                 style.fill = theme.props.icons;
             }
         },
@@ -17809,7 +17785,7 @@ function onStyleSheetLoaded(cb) {
 "use strict";
 
 // EXTERNAL MODULE: ./src/themes/dark.ts
-var dark = __webpack_require__(269);
+var dark = __webpack_require__(8);
 
 // CONCATENATED MODULE: ./src/themes/default.ts
 const defaultTheme = {
@@ -17837,7 +17813,8 @@ const defaultTheme = {
         shadows: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
         searchBarActiveBackground: 'rgb(255, 255, 255)',
         font: 'Roboto, sans-serif'
-    }
+    },
+    topBarBackground: 'white'
 };
 /* harmony default export */ var themes_default = (defaultTheme);
 
@@ -17862,6 +17839,43 @@ var slack = __webpack_require__(4);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+const darkTheme = {
+    name: 'Dark Mode',
+    props: {
+        primaryText: 'rgb(231, 232, 235)',
+        secondaryText: 'rgb(136, 153, 166)',
+        mentions: 'rgb(65, 173, 240)',
+        inlineMarkdownText: 'rgb(245, 245, 245)',
+        multilineMarkdownText: 'rgb(239, 239, 239)',
+        links: 'rgb(65, 173, 240)',
+        icons: 'rgba(255, 255, 255, 0.54)',
+        threadBackground: 'rgb(25, 39, 52)',
+        threadContainerBackground: 'rgb(21, 32, 43)',
+        chatTitleBackground: 'rgb(0, 0, 0)',
+        hoverBackground: 'rgb(32, 48, 61)',
+        mentionNotificationBackground: 'rgb(65, 173, 240)',
+        inlineMarkdownBackground: 'rgb(55, 86, 115)',
+        buttonBackground: 'rgb(29, 161, 242)',
+        iconHoverBackground: 'rgba(226, 230, 234, 0.14)',
+        threadBorderColor: 'rgb(83, 102, 115)',
+        multiLineMarkdownBorderColor: 'rgb(71, 110, 146)',
+        inlineMarkdownBorder: '1px solid rgb(62, 97, 130)',
+        borders: '1px solid rgb(135, 143, 156)',
+        shadows: 'rgba(154, 190, 214, 0.5) 0px 1px 2px 0px, rgba(154, 190, 214, 0.25) 0px 1px 3px 1px',
+        searchBarActiveBackground: 'rgb(25, 39, 52)',
+        font: 'Roboto, sans-serif'
+    },
+    topBarBackground: 'rgb(25, 39, 52)'
+};
+/* harmony default export */ __webpack_exports__["a"] = (darkTheme);
+
+
+/***/ }),
+
+/***/ 9:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return initializeCustomThemes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return initializeAppliedTheme; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return writeCustomThemes; });
@@ -17872,11 +17886,11 @@ var slack = __webpack_require__(4);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return onThemeChange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return handleCustomThemeChanges; });
 /* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var _themes_dark__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(269);
+/* harmony import */ var _themes_dark__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 /* harmony import */ var _themes_slack__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _themes_themeMeta__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
+/* harmony import */ var _themes_themeMeta__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13);
 /* harmony import */ var _ops__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5);
 
 
@@ -17983,13 +17997,13 @@ function handleCustomThemeChanges() {
 
 /***/ }),
 
-/***/ 95:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ops__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
 
 
 function main() {
