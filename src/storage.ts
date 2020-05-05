@@ -2,7 +2,9 @@ import themes from './themes';
 import DarkMode from './themes/dark';
 
 import Slack from './themes/slack';
-import { cloneDeep, each, range } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import each from 'lodash/each';
+import range from 'lodash/range';
 import { Theme } from './types';
 import ThemeMeta from './themes/themeMeta';
 import { applyThemeProperty } from './ops';

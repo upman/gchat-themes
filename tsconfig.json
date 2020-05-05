@@ -8,5 +8,15 @@
     },
     "types": [
         "chrome"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": [
+        "node_modules/@types",
+        "manual_typings"
+    ],
+    "paths": {
+        "lodash/*": [
+            "node_modules/@types/lodash-es/*"
+        ],
+    },
 }

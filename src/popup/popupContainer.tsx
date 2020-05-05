@@ -2,7 +2,7 @@ import React, { Component, Fragment, ChangeEvent } from 'react';
 import ReactSelect from 'react-select';
 // @ts-ignore
 import { ChromePicker } from 'react-color';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import cx from 'classnames';
 
 import { Theme } from '../types';

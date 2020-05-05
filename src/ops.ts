@@ -2,7 +2,14 @@ import {
     getLogoContainer,
     getIconSvgs,
 } from './dom';
-import { each, mapValues, map, some, range, keys } from 'lodash';
+import each from 'lodash/each';
+import mapValues from 'lodash/mapValues';
+import map from 'lodash/map';
+import some from 'lodash/some';
+import range from 'lodash/range';
+import keys from 'lodash/keys';
+
+
 import type { Theme } from './types';
 import ruleSwaps from './ruleSwaps';
 
