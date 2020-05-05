@@ -11,6 +11,7 @@ Or clone `git@github.com/upman/gchat-copy.git` if you are comfortable with Git
 3. In Chrome, go to 'Settings > Extensions'
 4. Enable 'Developer mode'
 5. Click on 'Load unpacked extension...' and select folder `dist/chrome-extension` in the folder that you just unzipped
+6. Reload google chat
 
 ## Firefox / Standalone scripts
 Download the repository with the same instructions as above and then install `dist/standalone/dark-mode.js` or `dist/standalone/slack-mode.js` into your [tamper](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/) / [grease monkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) plugin.
