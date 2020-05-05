@@ -2,6 +2,8 @@ import themes from './themes';
 import DarkMode from './themes/dark';
 
 import Slack from './themes/slack';
+import Dark from './themes/dark';
+import DefaultTheme from './themes/default';
 import cloneDeep from 'lodash/cloneDeep';
 import each from 'lodash/each';
 import range from 'lodash/range';
@@ -19,12 +21,12 @@ export function initializeCustomThemes() {
         } else {
             var customThemesObj = [
                 {
-                    ...cloneDeep(Slack),
+                    ...cloneDeep(DefaultTheme),
                     name: 'Custom Theme 1',
                     isCustom: true
                 },
                 {
-                    ...cloneDeep(Slack),
+                    ...cloneDeep(Dark),
                     name: 'Custom Theme 2',
                     isCustom: true
                 },
