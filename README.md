@@ -1,4 +1,4 @@
-# Google Themes
+# Google Chat Themes
 A chrome extension that lets you customise the font, color, backgrounds on Google Chat.
 Comes out of the box with a dark mode and slack mode.
 
