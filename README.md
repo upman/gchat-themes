@@ -2,7 +2,7 @@
 A chrome extension that lets you customise the font, color, backgrounds on Google Chat.
 Comes out of the box with a dark mode and slack mode.
 
-![Screenshot](https://media.giphy.com/media/QyztI0D81FHvcfTPuc/giphy.gif)
+![Screenshot](https://github.bus.zalan.do/Pandora/gchat-themes/raw/master/demo.gif)
 
 ## Installation
 1. Download "Source code (zip)" of the latest version in [Releases](https://github.bus.zalan.do/Pandora/gchat-themes/releases)
