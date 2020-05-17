@@ -4,7 +4,8 @@ type ThemeMeta = keyof Theme["props"]
     | 'sideBarBackground'
     | 'unreadChannelColor'
     | 'channelColor'
-    | 'topBarBackground';
+    | 'topBarBackground'
+    | 'userNameColor';
 
 var themeMeta: { [m in ThemeMeta]: { type: 'color' | 'text', label: string } } = {
     font: {
@@ -110,6 +111,10 @@ var themeMeta: { [m in ThemeMeta]: { type: 'color' | 'text', label: string } } =
     channelColor: {
         type: 'color',
         label: 'Channel title color'
+    },
+    userNameColor: {
+        type: 'color',
+        label: 'Username color'
     }
 };
 

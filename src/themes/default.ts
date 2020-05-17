@@ -26,7 +26,8 @@ const defaultTheme: Theme = {
         searchBarActiveBackground: 'rgb(255, 255, 255)',
         font: 'Roboto, sans-serif'
     },
-    topBarBackground: 'white'
+    topBarBackground: 'white',
+    userNameColor: 'rgb(32, 33, 36)'
 };
 
 export default defaultTheme;

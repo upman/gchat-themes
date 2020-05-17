@@ -28,5 +28,6 @@ export type Theme = {
     sideBarBackground?: string,
     unreadChannelColor?: string,
     channelColor?: string,
+    userNameColor: string,
     isCustom?: boolean
 }

@@ -13,32 +13,71 @@ import { applyThemeProperty } from './ops';
 
 const APPLIED_THEME_KEY = 'appliedTheme';
 const CUSTOM_THEMES_KEY = 'customThemes';
+const CUSTOM_THEME_VERSION_KEY = 'customThemesVersion';
+const CURRENT_CUSTOM_THEME_VERSION = 2;
 
 export function initializeCustomThemes() {
     getCustomThemes(customThemes => {
+        var customThemesObj = [
+            {
+                ...cloneDeep(DefaultTheme),
+                name: 'Custom Theme 1',
+                isCustom: true
+            },
+            {
+                ...cloneDeep(Dark),
+                name: 'Custom Theme 2',
+                isCustom: true
+            },
+            {
+                ...cloneDeep(Slack),
+                name: 'Custom Theme 3',
+                isCustom: true
+            }
+        ];
         if(customThemes) {
-            return;
-        } else {
-            var customThemesObj = [
-                {
-                    ...cloneDeep(DefaultTheme),
-                    name: 'Custom Theme 1',
-                    isCustom: true
-                },
-                {
-                    ...cloneDeep(Dark),
-                    name: 'Custom Theme 2',
-                    isCustom: true
-                },
-                {
-                    ...cloneDeep(Slack),
-                    name: 'Custom Theme 3',
-                    isCustom: true
+            getCustomThemesVersion((version) => {
+                if (version === CURRENT_CUSTOM_THEME_VERSION) {
+                    return;
+                } else {
+                    for(let i = 0; i < CURRENT_CUSTOM_THEME_VERSION; i++) {
+                        migrateCustomThemes(i, customThemes);
+                    }
+                    console.log(customThemes);
+                    setCustomThemes(customThemes);
+                    setCustomThemeVersion(CURRENT_CUSTOM_THEME_VERSION);
                 }
-            ];
-            chrome.storage.local.set({ [CUSTOM_THEMES_KEY]: customThemesObj });
+            });
+        } else {
+            setCustomThemes(customThemesObj);
         }
     });
+}
+
+export function setCustomThemeVersion(customThemeVersion) {
+    chrome.storage.local.set({ [CUSTOM_THEME_VERSION_KEY]: customThemeVersion });
+}
+
+export function setCustomThemes(customThemes) {
+    chrome.storage.local.set({ [CUSTOM_THEMES_KEY]: customThemes });
+}
+
+export function getCustomThemesVersion(cb) {
+    chrome.storage.local.get([CUSTOM_THEME_VERSION_KEY], (result) => {
+        if(result[CUSTOM_THEME_VERSION_KEY]) {
+            cb(result[CUSTOM_THEME_VERSION_KEY]);
+        } else {
+            cb(1);
+        }
+    });
+}
+
+export function migrateCustomThemes(i, customThemes) {
+    if (i === 1) {
+        each(customThemes, (customTheme) => {
+            customTheme.userNameColor = customTheme.props.primaryText;
+        });
+    }
 }
 
 export function initializeAppliedTheme() {
