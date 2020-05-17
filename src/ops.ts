@@ -150,3 +150,15 @@ export function onStyleSheetLoaded(cb) {
     checkLoaded();
     setInterval(checkLoaded, 1000);
 }
+
+export function addCustomStyles() {
+    const css = `
+        .cmEq8b .Z4BnXb {
+            color: black;
+        }
+    `
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.appendChild(document.createTextNode(css));
+    document.head.appendChild(style);
+}
