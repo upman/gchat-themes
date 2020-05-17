@@ -1,4 +1,4 @@
-import { applyTheme, initializeRuleSwapList, onStyleSheetLoaded, addRuleSwaps } from './ops';
+import { applyTheme, initializeRuleSwapList, onStyleSheetLoaded, addRuleSwaps, addCustomStyles } from './ops';
 import { getAppliedTheme, onThemeChange, handleCustomThemeChanges } from './storage';
 
 function main() {
@@ -10,6 +10,7 @@ function main() {
         });
     });
     handleCustomThemeChanges();
+    addCustomStyles();
 }
 
 window.onload = main;

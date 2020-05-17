@@ -204,6 +204,13 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
                     style.color = '';
                 }
             }
+        },
+        {
+            selectorTexts: ['.cmEq8b .Z4BnXb'], // This is a custom style that is being added by the extension
+            // The style already on the page is more general and has a larger surface area
+            transform: function(theme, themeProp, themeValue, style) {
+                style.color = theme.userNameColor;
+            }
         }
     ]
 };
