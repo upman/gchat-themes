@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 277);
+/******/ 	return __webpack_require__(__webpack_require__.s = 278);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -121,7 +121,7 @@ module.exports = isArray;
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var freeGlobal = __webpack_require__(55);
+var freeGlobal = __webpack_require__(56);
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -344,11 +344,12 @@ module.exports = map;
 "use strict";
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ applyTheme; });
-__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ applyThemeProperty; });
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ addRuleSwaps; });
-__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ initializeRuleSwapList; });
-__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ onStyleSheetLoaded; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ applyTheme; });
+__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ applyThemeProperty; });
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ addRuleSwaps; });
+__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ initializeRuleSwapList; });
+__webpack_require__.d(__webpack_exports__, "f", function() { return /* binding */ onStyleSheetLoaded; });
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ addCustomStyles; });
 
 // UNUSED EXPORTS: getMatchedStyleRules
 
@@ -598,6 +599,13 @@ const ruleSwaps_ruleSwaps = {
                     style.color = '';
                 }
             }
+        },
+        {
+            selectorTexts: ['.cmEq8b .Z4BnXb'],
+            // The style already on the page is more general and has a larger surface area
+            transform: function (theme, themeProp, themeValue, style) {
+                style.color = theme.userNameColor;
+            }
         }
     ]
 };
@@ -730,6 +738,17 @@ function onStyleSheetLoaded(cb) {
     checkLoaded();
     setInterval(checkLoaded, 1000);
 }
+function addCustomStyles() {
+    const css = `
+        .cmEq8b .Z4BnXb {
+            color: black;
+        }
+    `;
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.appendChild(document.createTextNode(css));
+    document.head.appendChild(style);
+}
 
 
 /***/ }),
@@ -770,7 +789,7 @@ module.exports = baseGetTag;
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(49),
+var isFunction = __webpack_require__(50),
     isLength = __webpack_require__(28);
 
 /**
@@ -1111,7 +1130,8 @@ const slackTheme = {
     topBarBackground: 'white',
     sideBarBackground: '#4A154B',
     unreadChannelColor: '#ffffff',
-    channelColor: '#cac4c9'
+    channelColor: '#cac4c9',
+    userNameColor: 'rgb(32, 33, 36)'
 };
 /* harmony default export */ __webpack_exports__["a"] = (slackTheme);
 
@@ -1121,7 +1141,7 @@ const slackTheme = {
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseForOwn = __webpack_require__(43),
+var baseForOwn = __webpack_require__(44),
     createBaseEach = __webpack_require__(94);
 
 /**
@@ -1215,7 +1235,7 @@ module.exports = isLength;
 
 var baseMatches = __webpack_require__(99),
     baseMatchesProperty = __webpack_require__(138),
-    identity = __webpack_require__(41),
+    identity = __webpack_require__(42),
     isArray = __webpack_require__(1),
     property = __webpack_require__(148);
 
@@ -1336,8 +1356,8 @@ module.exports = isKey;
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseAssignValue = __webpack_require__(42),
-    baseForOwn = __webpack_require__(43),
+var baseAssignValue = __webpack_require__(43),
+    baseForOwn = __webpack_require__(44),
     baseIteratee = __webpack_require__(29);
 
 /**
@@ -1389,7 +1409,7 @@ var arraySome = __webpack_require__(59),
     baseIteratee = __webpack_require__(29),
     baseSome = __webpack_require__(152),
     isArray = __webpack_require__(1),
-    isIterateeCall = __webpack_require__(51);
+    isIterateeCall = __webpack_require__(52);
 
 /**
  * Checks if `predicate` returns truthy for **any** element of `collection`.
@@ -1526,7 +1546,7 @@ var DataView = __webpack_require__(133),
     Set = __webpack_require__(135),
     WeakMap = __webpack_require__(136),
     baseGetTag = __webpack_require__(11),
-    toSource = __webpack_require__(56);
+    toSource = __webpack_require__(57);
 
 /** `Object#toString` result references. */
 var mapTag = '[object Map]',
@@ -1610,8 +1630,42 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 40 */,
-/* 41 */
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsEqualDeep = __webpack_require__(123),
+    isObjectLike = __webpack_require__(7);
+
+/**
+ * The base implementation of `_.isEqual` which supports partial comparisons
+ * and tracks traversed objects.
+ *
+ * @private
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @param {boolean} bitmask The bitmask flags.
+ *  1 - Unordered comparison
+ *  2 - Partial comparison
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @param {Object} [stack] Tracks traversed `value` and `other` objects.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ */
+function baseIsEqual(value, other, bitmask, customizer, stack) {
+  if (value === other) {
+    return true;
+  }
+  if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
+    return value !== value && other !== other;
+  }
+  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+}
+
+module.exports = baseIsEqual;
+
+
+/***/ }),
+/* 41 */,
+/* 42 */
 /***/ (function(module, exports) {
 
 /**
@@ -1638,7 +1692,7 @@ module.exports = identity;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var defineProperty = __webpack_require__(80);
@@ -1669,7 +1723,7 @@ module.exports = baseAssignValue;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseFor = __webpack_require__(78),
@@ -1691,7 +1745,7 @@ module.exports = baseForOwn;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsArguments = __webpack_require__(86),
@@ -1733,12 +1787,12 @@ module.exports = isArguments;
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsTypedArray = __webpack_require__(91),
-    baseUnary = __webpack_require__(46),
-    nodeUtil = __webpack_require__(47);
+    baseUnary = __webpack_require__(47),
+    nodeUtil = __webpack_require__(48);
 
 /* Node.js helper references. */
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
@@ -1766,7 +1820,7 @@ module.exports = isTypedArray;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 /**
@@ -1786,10 +1840,10 @@ module.exports = baseUnary;
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(55);
+/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(56);
 
 /** Detect free variable `exports`. */
 var freeExports =  true && exports && !exports.nodeType && exports;
@@ -1823,7 +1877,7 @@ module.exports = nodeUtil;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(39)(module)))
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -1847,7 +1901,7 @@ module.exports = isPrototype;
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(11),
@@ -1890,7 +1944,7 @@ module.exports = isFunction;
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayFilter = __webpack_require__(132),
@@ -1926,7 +1980,7 @@ module.exports = getSymbols;
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var eq = __webpack_require__(21),
@@ -1962,10 +2016,10 @@ module.exports = isIterateeCall;
 
 
 /***/ }),
-/* 52 */,
 /* 53 */,
 /* 54 */,
-/* 55 */
+/* 55 */,
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -1976,7 +2030,7 @@ module.exports = freeGlobal;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(87)))
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -2005,40 +2059,6 @@ function toSource(func) {
 }
 
 module.exports = toSource;
-
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsEqualDeep = __webpack_require__(123),
-    isObjectLike = __webpack_require__(7);
-
-/**
- * The base implementation of `_.isEqual` which supports partial comparisons
- * and tracks traversed objects.
- *
- * @private
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @param {boolean} bitmask The bitmask flags.
- *  1 - Unordered comparison
- *  2 - Partial comparison
- * @param {Function} [customizer] The function to customize comparisons.
- * @param {Object} [stack] Tracks traversed `value` and `other` objects.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- */
-function baseIsEqual(value, other, bitmask, customizer, stack) {
-  if (value === other) {
-    return true;
-  }
-  if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
-    return value !== value && other !== other;
-  }
-  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
-}
-
-module.exports = baseIsEqual;
 
 
 /***/ }),
@@ -2324,11 +2344,11 @@ module.exports = arrayEach;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseTimes = __webpack_require__(85),
-    isArguments = __webpack_require__(44),
+    isArguments = __webpack_require__(45),
     isArray = __webpack_require__(1),
     isBuffer = __webpack_require__(35),
     isIndex = __webpack_require__(27),
-    isTypedArray = __webpack_require__(45);
+    isTypedArray = __webpack_require__(46);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -2412,7 +2432,7 @@ module.exports = Uint8Array;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetAllKeys = __webpack_require__(71),
-    getSymbols = __webpack_require__(50),
+    getSymbols = __webpack_require__(51),
     keys = __webpack_require__(8);
 
 /**
@@ -2540,7 +2560,7 @@ module.exports = baseFor;
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var identity = __webpack_require__(41);
+var identity = __webpack_require__(42);
 
 /**
  * Casts `value` to `identity` if it's not a function.
@@ -2974,7 +2994,7 @@ module.exports = baseIsTypedArray;
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isPrototype = __webpack_require__(48),
+var isPrototype = __webpack_require__(49),
     nativeKeys = __webpack_require__(93);
 
 /** Used for built-in method references. */
@@ -3060,10 +3080,10 @@ module.exports = createBaseEach;
 /* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(49),
+var isFunction = __webpack_require__(50),
     isMasked = __webpack_require__(96),
     isObject = __webpack_require__(4),
-    toSource = __webpack_require__(56);
+    toSource = __webpack_require__(57);
 
 /**
  * Used to match `RegExp`
@@ -3199,7 +3219,7 @@ module.exports = baseMatches;
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(36),
-    baseIsEqual = __webpack_require__(57);
+    baseIsEqual = __webpack_require__(40);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -3857,7 +3877,7 @@ var Stack = __webpack_require__(36),
     getTag = __webpack_require__(37),
     isArray = __webpack_require__(1),
     isBuffer = __webpack_require__(35),
-    isTypedArray = __webpack_require__(45);
+    isTypedArray = __webpack_require__(46);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -4410,7 +4430,7 @@ module.exports = getMatchData;
 /* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsEqual = __webpack_require__(57),
+var baseIsEqual = __webpack_require__(40),
     get = __webpack_require__(139),
     hasIn = __webpack_require__(145),
     isKey = __webpack_require__(32),
@@ -4769,7 +4789,7 @@ module.exports = baseHasIn;
 /***/ (function(module, exports, __webpack_require__) {
 
 var castPath = __webpack_require__(63),
-    isArguments = __webpack_require__(44),
+    isArguments = __webpack_require__(45),
     isArray = __webpack_require__(1),
     isIndex = __webpack_require__(27),
     isLength = __webpack_require__(28),
@@ -4950,7 +4970,7 @@ module.exports = baseSome;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseRange = __webpack_require__(154),
-    isIterateeCall = __webpack_require__(51),
+    isIterateeCall = __webpack_require__(52),
     toFinite = __webpack_require__(155);
 
 /**
@@ -5185,7 +5205,8 @@ module.exports = toFinite;
 /* 274 */,
 /* 275 */,
 /* 276 */,
-/* 277 */
+/* 277 */,
+/* 278 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5198,10 +5219,10 @@ function main() {
     if (!window.location.href.match('chat.google.com')) {
         return;
     }
-    Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* initializeRuleSwapList */ "d"])();
-    Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* onStyleSheetLoaded */ "e"])(function (styleSheet) {
-        Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* addRuleSwaps */ "a"])(styleSheet);
-        Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* applyTheme */ "b"])(_themes_slack__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+    Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* initializeRuleSwapList */ "e"])();
+    Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* onStyleSheetLoaded */ "f"])(function (styleSheet) {
+        Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* addRuleSwaps */ "b"])(styleSheet);
+        Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* applyTheme */ "c"])(_themes_slack__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
     });
 }
 window.onload = main;
