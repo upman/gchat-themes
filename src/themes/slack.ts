@@ -29,7 +29,8 @@ const slackTheme: Theme = {
     topBarBackground: 'white',
     sideBarBackground: '#4A154B',
     unreadChannelColor: '#ffffff',
-    channelColor: '#cac4c9'
+    channelColor: '#cac4c9',
+    userNameColor: 'rgb(32, 33, 36)'
 };
 
 export default slackTheme;

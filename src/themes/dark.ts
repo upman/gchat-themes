@@ -26,7 +26,8 @@ const darkTheme: Theme = {
         searchBarActiveBackground: 'rgb(25, 39, 52)',
         font: 'Roboto, sans-serif'
     },
-    topBarBackground: 'rgb(25, 39, 52)'
+    topBarBackground: 'rgb(25, 39, 52)',
+    userNameColor: 'rgb(231, 232, 235)'
 };
 
 export default darkTheme;
