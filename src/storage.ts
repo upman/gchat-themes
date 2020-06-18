@@ -43,7 +43,6 @@ export function initializeCustomThemes() {
                     for(let i = 0; i < CURRENT_CUSTOM_THEME_VERSION; i++) {
                         migrateCustomThemes(i, customThemes);
                     }
-                    console.log(customThemes);
                     setCustomThemes(customThemes);
                     setCustomThemeVersion(CURRENT_CUSTOM_THEME_VERSION);
                 }
