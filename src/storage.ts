@@ -71,8 +71,8 @@ export function getCustomThemesVersion(cb) {
     });
 }
 
-export function migrateCustomThemes(i, customThemes) {
-    if (i === 1) {
+export function migrateCustomThemes(version, customThemes) {
+    if (version === 1) {
         each(customThemes, (customTheme) => {
             customTheme.userNameColor = customTheme.props.primaryText;
         });
