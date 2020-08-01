@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 278);
+/******/ 	return __webpack_require__(__webpack_require__.s = 277);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -121,7 +121,7 @@ module.exports = isArray;
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var freeGlobal = __webpack_require__(56);
+var freeGlobal = __webpack_require__(55);
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -280,65 +280,6 @@ module.exports = keys;
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayMap = __webpack_require__(64),
-    baseIteratee = __webpack_require__(29),
-    baseMap = __webpack_require__(151),
-    isArray = __webpack_require__(1);
-
-/**
- * Creates an array of values by running each element in `collection` thru
- * `iteratee`. The iteratee is invoked with three arguments:
- * (value, index|key, collection).
- *
- * Many lodash methods are guarded to work as iteratees for methods like
- * `_.every`, `_.filter`, `_.map`, `_.mapValues`, `_.reject`, and `_.some`.
- *
- * The guarded methods are:
- * `ary`, `chunk`, `curry`, `curryRight`, `drop`, `dropRight`, `every`,
- * `fill`, `invert`, `parseInt`, `random`, `range`, `rangeRight`, `repeat`,
- * `sampleSize`, `slice`, `some`, `sortBy`, `split`, `take`, `takeRight`,
- * `template`, `trim`, `trimEnd`, `trimStart`, and `words`
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Collection
- * @param {Array|Object} collection The collection to iterate over.
- * @param {Function} [iteratee=_.identity] The function invoked per iteration.
- * @returns {Array} Returns the new mapped array.
- * @example
- *
- * function square(n) {
- *   return n * n;
- * }
- *
- * _.map([4, 8], square);
- * // => [16, 64]
- *
- * _.map({ 'a': 4, 'b': 8 }, square);
- * // => [16, 64] (iteration order is not guaranteed)
- *
- * var users = [
- *   { 'user': 'barney' },
- *   { 'user': 'fred' }
- * ];
- *
- * // The `_.property` iteratee shorthand.
- * _.map(users, 'user');
- * // => ['barney', 'fred']
- */
-function map(collection, iteratee) {
-  var func = isArray(collection) ? arrayMap : baseMap;
-  return func(collection, baseIteratee(iteratee, 3));
-}
-
-module.exports = map;
-
-
-/***/ }),
-/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -375,7 +316,7 @@ var mapValues = __webpack_require__(33);
 var mapValues_default = /*#__PURE__*/__webpack_require__.n(mapValues);
 
 // EXTERNAL MODULE: ./node_modules/lodash/map.js
-var map = __webpack_require__(9);
+var map = __webpack_require__(10);
 var map_default = /*#__PURE__*/__webpack_require__.n(map);
 
 // EXTERNAL MODULE: ./node_modules/lodash/some.js
@@ -432,12 +373,12 @@ const ruleSwaps_ruleSwaps = {
     ],
     threadBackground: [{
             prop: 'backgroundColor',
-            initial: ['rgb(255, 255, 255)']
+            initial: ['rgb(255, 255, 255)', 'rgba(241,243,244,0.749)', 'white']
         }],
     threadContainerBackground: [
         {
             prop: 'backgroundColor',
-            initial: ['rgb(242, 242, 242)']
+            initial: ['rgb(242, 242, 242)', 'rgb(255, 255, 255)']
         },
         {
             // Account Dialog managed by dialog in accounts dropdown
@@ -452,7 +393,7 @@ const ruleSwaps_ruleSwaps = {
     hoverBackground: [
         {
             prop: 'backgroundColor',
-            initial: ['rgb(248, 249, 250)']
+            initial: ['rgb(248, 249, 250)', 'rgba(241, 243, 244, 0.75)']
         },
         {
             //Account drop down hover background
@@ -564,6 +505,19 @@ const ruleSwaps_ruleSwaps = {
                 }
                 else {
                     style.background = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.t5F5nf', '.gWTIDe'],
+            transform: function (theme, themeProp, themeValue, style) {
+                // Set sidebar channel name color and status indicator text color
+                //  to white on slack mode
+                if (theme.sideBarBackground && style.color) {
+                    style.color = 'white';
+                }
+                else {
+                    style.color = theme.primaryText;
                 }
             }
         },
@@ -743,12 +697,75 @@ function addCustomStyles() {
         .cmEq8b .Z4BnXb {
             color: black;
         }
+
+        .d6pS5 {
+            box-shadow: none;
+        }
     `;
     const style = document.createElement('style');
     style.type = 'text/css';
     style.appendChild(document.createTextNode(css));
     document.head.appendChild(style);
 }
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayMap = __webpack_require__(64),
+    baseIteratee = __webpack_require__(29),
+    baseMap = __webpack_require__(151),
+    isArray = __webpack_require__(1);
+
+/**
+ * Creates an array of values by running each element in `collection` thru
+ * `iteratee`. The iteratee is invoked with three arguments:
+ * (value, index|key, collection).
+ *
+ * Many lodash methods are guarded to work as iteratees for methods like
+ * `_.every`, `_.filter`, `_.map`, `_.mapValues`, `_.reject`, and `_.some`.
+ *
+ * The guarded methods are:
+ * `ary`, `chunk`, `curry`, `curryRight`, `drop`, `dropRight`, `every`,
+ * `fill`, `invert`, `parseInt`, `random`, `range`, `rangeRight`, `repeat`,
+ * `sampleSize`, `slice`, `some`, `sortBy`, `split`, `take`, `takeRight`,
+ * `template`, `trim`, `trimEnd`, `trimStart`, and `words`
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Collection
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ * @example
+ *
+ * function square(n) {
+ *   return n * n;
+ * }
+ *
+ * _.map([4, 8], square);
+ * // => [16, 64]
+ *
+ * _.map({ 'a': 4, 'b': 8 }, square);
+ * // => [16, 64] (iteration order is not guaranteed)
+ *
+ * var users = [
+ *   { 'user': 'barney' },
+ *   { 'user': 'fred' }
+ * ];
+ *
+ * // The `_.property` iteratee shorthand.
+ * _.map(users, 'user');
+ * // => ['barney', 'fred']
+ */
+function map(collection, iteratee) {
+  var func = isArray(collection) ? arrayMap : baseMap;
+  return func(collection, baseIteratee(iteratee, 3));
+}
+
+module.exports = map;
 
 
 /***/ }),
@@ -789,7 +806,7 @@ module.exports = baseGetTag;
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(50),
+var isFunction = __webpack_require__(49),
     isLength = __webpack_require__(28);
 
 /**
@@ -1141,7 +1158,7 @@ const slackTheme = {
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseForOwn = __webpack_require__(44),
+var baseForOwn = __webpack_require__(43),
     createBaseEach = __webpack_require__(94);
 
 /**
@@ -1235,7 +1252,7 @@ module.exports = isLength;
 
 var baseMatches = __webpack_require__(99),
     baseMatchesProperty = __webpack_require__(138),
-    identity = __webpack_require__(42),
+    identity = __webpack_require__(41),
     isArray = __webpack_require__(1),
     property = __webpack_require__(148);
 
@@ -1356,8 +1373,8 @@ module.exports = isKey;
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseAssignValue = __webpack_require__(43),
-    baseForOwn = __webpack_require__(44),
+var baseAssignValue = __webpack_require__(42),
+    baseForOwn = __webpack_require__(43),
     baseIteratee = __webpack_require__(29);
 
 /**
@@ -1409,7 +1426,7 @@ var arraySome = __webpack_require__(59),
     baseIteratee = __webpack_require__(29),
     baseSome = __webpack_require__(152),
     isArray = __webpack_require__(1),
-    isIterateeCall = __webpack_require__(52);
+    isIterateeCall = __webpack_require__(51);
 
 /**
  * Checks if `predicate` returns truthy for **any** element of `collection`.
@@ -1546,7 +1563,7 @@ var DataView = __webpack_require__(133),
     Set = __webpack_require__(135),
     WeakMap = __webpack_require__(136),
     baseGetTag = __webpack_require__(11),
-    toSource = __webpack_require__(57);
+    toSource = __webpack_require__(56);
 
 /** `Object#toString` result references. */
 var mapTag = '[object Map]',
@@ -1630,42 +1647,8 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsEqualDeep = __webpack_require__(123),
-    isObjectLike = __webpack_require__(7);
-
-/**
- * The base implementation of `_.isEqual` which supports partial comparisons
- * and tracks traversed objects.
- *
- * @private
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @param {boolean} bitmask The bitmask flags.
- *  1 - Unordered comparison
- *  2 - Partial comparison
- * @param {Function} [customizer] The function to customize comparisons.
- * @param {Object} [stack] Tracks traversed `value` and `other` objects.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- */
-function baseIsEqual(value, other, bitmask, customizer, stack) {
-  if (value === other) {
-    return true;
-  }
-  if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
-    return value !== value && other !== other;
-  }
-  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
-}
-
-module.exports = baseIsEqual;
-
-
-/***/ }),
-/* 41 */,
-/* 42 */
+/* 40 */,
+/* 41 */
 /***/ (function(module, exports) {
 
 /**
@@ -1692,7 +1675,7 @@ module.exports = identity;
 
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var defineProperty = __webpack_require__(80);
@@ -1723,7 +1706,7 @@ module.exports = baseAssignValue;
 
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseFor = __webpack_require__(78),
@@ -1745,7 +1728,7 @@ module.exports = baseForOwn;
 
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsArguments = __webpack_require__(86),
@@ -1787,12 +1770,12 @@ module.exports = isArguments;
 
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsTypedArray = __webpack_require__(91),
-    baseUnary = __webpack_require__(47),
-    nodeUtil = __webpack_require__(48);
+    baseUnary = __webpack_require__(46),
+    nodeUtil = __webpack_require__(47);
 
 /* Node.js helper references. */
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
@@ -1820,7 +1803,7 @@ module.exports = isTypedArray;
 
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /**
@@ -1840,10 +1823,10 @@ module.exports = baseUnary;
 
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(56);
+/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(55);
 
 /** Detect free variable `exports`. */
 var freeExports =  true && exports && !exports.nodeType && exports;
@@ -1877,7 +1860,7 @@ module.exports = nodeUtil;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(39)(module)))
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -1901,7 +1884,7 @@ module.exports = isPrototype;
 
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(11),
@@ -1944,7 +1927,7 @@ module.exports = isFunction;
 
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayFilter = __webpack_require__(132),
@@ -1980,7 +1963,7 @@ module.exports = getSymbols;
 
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var eq = __webpack_require__(21),
@@ -2016,10 +1999,10 @@ module.exports = isIterateeCall;
 
 
 /***/ }),
+/* 52 */,
 /* 53 */,
 /* 54 */,
-/* 55 */,
-/* 56 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -2030,7 +2013,7 @@ module.exports = freeGlobal;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(87)))
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -2059,6 +2042,40 @@ function toSource(func) {
 }
 
 module.exports = toSource;
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsEqualDeep = __webpack_require__(123),
+    isObjectLike = __webpack_require__(7);
+
+/**
+ * The base implementation of `_.isEqual` which supports partial comparisons
+ * and tracks traversed objects.
+ *
+ * @private
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @param {boolean} bitmask The bitmask flags.
+ *  1 - Unordered comparison
+ *  2 - Partial comparison
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @param {Object} [stack] Tracks traversed `value` and `other` objects.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ */
+function baseIsEqual(value, other, bitmask, customizer, stack) {
+  if (value === other) {
+    return true;
+  }
+  if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
+    return value !== value && other !== other;
+  }
+  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+}
+
+module.exports = baseIsEqual;
 
 
 /***/ }),
@@ -2344,11 +2361,11 @@ module.exports = arrayEach;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseTimes = __webpack_require__(85),
-    isArguments = __webpack_require__(45),
+    isArguments = __webpack_require__(44),
     isArray = __webpack_require__(1),
     isBuffer = __webpack_require__(35),
     isIndex = __webpack_require__(27),
-    isTypedArray = __webpack_require__(46);
+    isTypedArray = __webpack_require__(45);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -2432,7 +2449,7 @@ module.exports = Uint8Array;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetAllKeys = __webpack_require__(71),
-    getSymbols = __webpack_require__(51),
+    getSymbols = __webpack_require__(50),
     keys = __webpack_require__(8);
 
 /**
@@ -2560,7 +2577,7 @@ module.exports = baseFor;
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var identity = __webpack_require__(42);
+var identity = __webpack_require__(41);
 
 /**
  * Casts `value` to `identity` if it's not a function.
@@ -2994,7 +3011,7 @@ module.exports = baseIsTypedArray;
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isPrototype = __webpack_require__(49),
+var isPrototype = __webpack_require__(48),
     nativeKeys = __webpack_require__(93);
 
 /** Used for built-in method references. */
@@ -3080,10 +3097,10 @@ module.exports = createBaseEach;
 /* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(50),
+var isFunction = __webpack_require__(49),
     isMasked = __webpack_require__(96),
     isObject = __webpack_require__(4),
-    toSource = __webpack_require__(57);
+    toSource = __webpack_require__(56);
 
 /**
  * Used to match `RegExp`
@@ -3219,7 +3236,7 @@ module.exports = baseMatches;
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(36),
-    baseIsEqual = __webpack_require__(40);
+    baseIsEqual = __webpack_require__(57);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -3877,7 +3894,7 @@ var Stack = __webpack_require__(36),
     getTag = __webpack_require__(37),
     isArray = __webpack_require__(1),
     isBuffer = __webpack_require__(35),
-    isTypedArray = __webpack_require__(46);
+    isTypedArray = __webpack_require__(45);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -4430,7 +4447,7 @@ module.exports = getMatchData;
 /* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsEqual = __webpack_require__(40),
+var baseIsEqual = __webpack_require__(57),
     get = __webpack_require__(139),
     hasIn = __webpack_require__(145),
     isKey = __webpack_require__(32),
@@ -4789,7 +4806,7 @@ module.exports = baseHasIn;
 /***/ (function(module, exports, __webpack_require__) {
 
 var castPath = __webpack_require__(63),
-    isArguments = __webpack_require__(45),
+    isArguments = __webpack_require__(44),
     isArray = __webpack_require__(1),
     isIndex = __webpack_require__(27),
     isLength = __webpack_require__(28),
@@ -4970,7 +4987,7 @@ module.exports = baseSome;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseRange = __webpack_require__(154),
-    isIterateeCall = __webpack_require__(52),
+    isIterateeCall = __webpack_require__(51),
     toFinite = __webpack_require__(155);
 
 /**
@@ -5205,13 +5222,12 @@ module.exports = toFinite;
 /* 274 */,
 /* 275 */,
 /* 276 */,
-/* 277 */,
-/* 278 */
+/* 277 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ops__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* harmony import */ var _ops__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
 /* harmony import */ var _themes_slack__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24);
 
 
