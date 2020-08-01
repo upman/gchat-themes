@@ -156,6 +156,10 @@ export function addCustomStyles() {
         .cmEq8b .Z4BnXb {
             color: black;
         }
+
+        .d6pS5 {
+            box-shadow: none;
+        }
     `
     const style = document.createElement('style');
     style.type = 'text/css';

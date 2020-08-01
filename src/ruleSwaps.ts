@@ -41,12 +41,12 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
     ],
     threadBackground: [{
         prop: 'backgroundColor',
-        initial: ['rgb(255, 255, 255)']
+        initial: ['rgb(255, 255, 255)', 'rgba(241,243,244,0.749)', 'white']
     }],
     threadContainerBackground: [
         {
             prop: 'backgroundColor',
-            initial: ['rgb(242, 242, 242)']
+            initial: ['rgb(242, 242, 242)', 'rgb(255, 255, 255)']
         },
         {
             // Account Dialog managed by dialog in accounts dropdown
@@ -61,7 +61,7 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
     hoverBackground: [
         {
             prop: 'backgroundColor',
-            initial: ['rgb(248, 249, 250)']
+            initial: ['rgb(248, 249, 250)', 'rgba(241, 243, 244, 0.75)']
         },
         {
             //Account drop down hover background
@@ -172,6 +172,18 @@ const ruleSwaps: {[key in (keyof Theme["props"] | 'misc')]: Array<any>} = {
                     style.background = theme.sideBarBackground;
                 } else {
                     style.background = '';
+                }
+            }
+        },
+        {
+            selectorTexts: ['.t5F5nf', '.gWTIDe'],
+            transform: function(theme, themeProp, themeValue, style) {
+                // Set sidebar channel name color and status indicator text color
+                //  to white on slack mode
+                if (theme.sideBarBackground && style.color) {
+                    style.color = 'white';
+                } else {
+                    style.color = theme.primaryText;
                 }
             }
         },

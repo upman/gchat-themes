@@ -49,6 +49,9 @@ module.exports = {
             { from: 'manifest.json', to: 'dist/chrome-extension/manifest.json', transformPath: function(targetPath) {
                 return path.join('..', targetPath);
             } },
+            { from: 'icon.png', to: 'dist/chrome-extension/icon.png', transformPath: function(targetPath) {
+                return path.join('..', targetPath);
+            } },
             { from: 'src/popup/popup.html', to: 'dist/chrome-extension/src/popup/popup.html', transformPath: function(targetPath) {
                 return path.join('..', targetPath);
             } },
