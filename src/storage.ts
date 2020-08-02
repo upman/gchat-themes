@@ -43,7 +43,6 @@ export function initializeCustomThemes() {
                     for(let i = 0; i < CURRENT_CUSTOM_THEME_VERSION; i++) {
                         migrateCustomThemes(i, customThemes);
                     }
-                    console.log(customThemes);
                     setCustomThemes(customThemes);
                     setCustomThemeVersion(CURRENT_CUSTOM_THEME_VERSION);
                 }
@@ -72,8 +71,8 @@ export function getCustomThemesVersion(cb) {
     });
 }
 
-export function migrateCustomThemes(i, customThemes) {
-    if (i === 1) {
+export function migrateCustomThemes(version, customThemes) {
+    if (version === 1) {
         each(customThemes, (customTheme) => {
             customTheme.userNameColor = customTheme.props.primaryText;
         });
