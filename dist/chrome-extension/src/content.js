@@ -2221,8 +2221,8 @@ function getCustomThemesVersion(cb) {
         }
     });
 }
-function migrateCustomThemes(i, customThemes) {
-    if (i === 1) {
+function migrateCustomThemes(version, customThemes) {
+    if (version === 1) {
         lodash_each__WEBPACK_IMPORTED_MODULE_5___default()(customThemes, (customTheme) => {
             customTheme.userNameColor = customTheme.props.primaryText;
         });
