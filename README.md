@@ -4,7 +4,12 @@ Comes out of the box with a dark mode and slack mode.
 
 ![Screenshot](https://github.com/upman/gchat-themes/blob/master/demo.gif?raw=true)
 
-## Installation
+# Installation
+
+## From Chrome web store
+- https://chrome.google.com/webstore/detail/google-chat-themes/olnlihilabjhneiedkofjdenhboogmeg
+
+## From Source
 1. Download "Source code (zip)" of the latest version in [Releases](https://github.com/upman/gchat-copy/releases)
 Or clone `git@github.com/upman/gchat-copy.git` if you are comfortable with Git
 2. Unzip the downloaded zip file
