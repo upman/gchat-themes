@@ -4,7 +4,12 @@ Comes out of the box with a dark mode and slack mode.
 
 ![Screenshot](https://github.bus.zalan.do/Pandora/gchat-themes/raw/master/demo.gif)
 
-## Installation
+# Installation
+
+## From Chrome web store
+- https://chrome.google.com/webstore/detail/google-chat-themes/olnlihilabjhneiedkofjdenhboogmeg
+
+## From Source
 1. Download "Source code (zip)" of the latest version in [Releases](https://github.bus.zalan.do/Pandora/gchat-themes/releases)
 Or clone `git@github.bus.zalan.do:Pandora/gchat-themes.git` if you are comfortable with Git
 2. Unzip the downloaded zip file
