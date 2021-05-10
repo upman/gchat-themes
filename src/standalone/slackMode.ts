@@ -2,7 +2,7 @@ import { applyTheme, initializeRuleSwapList, onStyleSheetLoaded, addRuleSwaps } 
 import slack from '../themes/slack';
 
 function main() {
-    if (!window.location.href.match('chat.google.com')) {
+    if (!window.location.href.match('mail.google.com/chat/')) {
         return;
     }
     initializeRuleSwapList();
