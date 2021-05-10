@@ -5232,7 +5232,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function main() {
-    if (!window.location.href.match('chat.google.com')) {
+    if (!window.location.href.match('mail.google.com/chat/')) {
         return;
     }
     Object(_ops__WEBPACK_IMPORTED_MODULE_0__[/* initializeRuleSwapList */ "e"])();
