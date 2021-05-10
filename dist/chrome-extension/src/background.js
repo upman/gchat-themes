@@ -6523,7 +6523,7 @@ chrome.runtime.onInstalled.addListener(function () {
             {
                 conditions: [
                     new chrome.declarativeContent.PageStateMatcher({
-                        pageUrl: { urlContains: 'chat.google.com' },
+                        pageUrl: { urlContains: 'mail.google.com/chat/' },
                     })
                 ],
                 // And shows the extension's page action.
