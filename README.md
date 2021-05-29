@@ -28,3 +28,10 @@ There is a reload button on the extensions page that can be used when you make c
 ## Contributing a new theme
 Create a file in the `themes` directory with all the values specified and create a pull request.
 Use `themes/slack.ts` or `themes/dark.ts` as examples.
+
+## Buy me a coffee
+[
+  ![Donate with PayPal]
+  (https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png)
+]
+(https://www.paypal.com/donate?hosted_button_id=BL4NDDVH8AGUY)
