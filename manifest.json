@@ -1,13 +1,15 @@
 {
-"manifest_version": 2,
+    "manifest_version": 2,
     "name": "Google Chat Themes",
     "description": "Change google chat theme to dark mode, slack mode or make your own",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "content_scripts": [
         {
             "matches": [
-                "https://chat.google.com/*"
+                "https://chat.google.com/*",
+                "https://mail.google.com/chat/*"
             ],
+            "all_frames": true,
             "js": [
                 "./src/content.js"
             ],

@@ -6,5 +6,7 @@ export default {
     // The keys here are used as copy in the select box in popup.ts
     [defaultMode.name]: defaultMode,
     [dark.name]: dark,
-    [slackTheme.name]: slackTheme,
+    // Slack mode doesn't work with the new mail.google.com/chat
+    // Commenting out for now
+    // [slackTheme.name]: slackTheme,
 };

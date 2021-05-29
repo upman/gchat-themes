@@ -9,6 +9,9 @@ chrome.runtime.onInstalled.addListener(function() {
             {
                 conditions: [
                     new chrome.declarativeContent.PageStateMatcher({
+                        pageUrl: { urlContains: 'mail.google.com/chat' },
+                    }),
+                    new chrome.declarativeContent.PageStateMatcher({
                         pageUrl: { urlContains: 'chat.google.com' },
                     })
                 ],

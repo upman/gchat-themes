@@ -2,7 +2,7 @@ import { applyTheme, initializeRuleSwapList, onStyleSheetLoaded, addRuleSwaps } 
 import dark from '../themes/dark';
 
 function main() {
-    if (!window.location.href.match('chat.google.com')) {
+    if (!window.location.href.match('chat.google.com') && !window.location.href.match('mail.google.com/chat')) {
         return;
     }
     initializeRuleSwapList();
